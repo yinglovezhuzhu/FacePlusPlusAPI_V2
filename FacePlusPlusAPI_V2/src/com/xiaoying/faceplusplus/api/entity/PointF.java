@@ -39,4 +39,9 @@ public class PointF {
 		this.x = point.x;
 		this.y = point.y;
 	}
+
+	@Override
+	public String toString() {
+		return "PointF [x=" + x + ", y=" + y + "]";
+	}
 }
