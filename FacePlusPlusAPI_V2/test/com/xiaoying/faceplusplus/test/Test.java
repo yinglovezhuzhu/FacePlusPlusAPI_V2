@@ -11,10 +11,12 @@
 package com.xiaoying.faceplusplus.test;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 
-import com.xiaoying.faceplusplus.api.utils.HttpUtil;
+import org.apache.http.client.ClientProtocolException;
+
+import com.xiaoying.faceplusplus.api.client.Client;
+import com.xiaoying.faceplusplus.api.service.FaceService;
 
 /**
  * 功能：测试类
@@ -25,10 +27,15 @@ public class Test {
 	public static String APP_SECRET = "pyGS__qcKYwn3yuTvWONluk9ciIfvY8A";
 
 	public static void main(String [] args) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("img", new File("/home/xiaoying/pic9.jpg"));
-		params.put("api_key", APP_KEY);
-		params.put("api_secret", APP_SECRET);
-		HttpUtil.doPost("/detection/detect", params);
+		Client client = new Client(APP_KEY, APP_SECRET);
+		FaceService faceService = new FaceService(client);
+		try {
+//			System.out.println(faceService.detect(new File("/home/xiaoying/pic3.jpg")));
+			System.out.println(faceService.detect("http://www.taihainet.com/news/UploadFiles_6334/201009/20100904072320558.jpg"));
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
