@@ -1,0 +1,722 @@
+检测结果
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 5, 
+                    "value": 16
+                }, 
+                "gender": {
+                    "confidence": 77.4861, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 97.9257, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "2bc15dd0fbaf99e958b46e7ec4b7450d", 
+            "position": {
+                "center": {
+                    "x": 46.5, 
+                    "y": 33.444444
+                }, 
+                "eye_left": {
+                    "x": 40.129, 
+                    "y": 26.476222
+                }, 
+                "eye_right": {
+                    "x": 56.985333, 
+                    "y": 29.287333
+                }, 
+                "height": 24.666667, 
+                "mouth_left": {
+                    "x": 37.580333, 
+                    "y": 37.305556
+                }, 
+                "mouth_right": {
+                    "x": 53.644, 
+                    "y": 40.873778
+                }, 
+                "nose": {
+                    "x": 43.887333, 
+                    "y": 34.992667
+                }, 
+                "width": 37.0
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 450, 
+    "img_id": "c9f3dd0b0c66ff9702310bfcd1bff0e2", 
+    "img_width": 300, 
+    "session_id": "c698666d3f2940f194fd49481c8d2932", 
+    "url": null
+}
+
+创建Pserson
+{
+    "added_face": 0, 
+    "added_group": 0, 
+    "person_id": "1c8fc38ce833b747dda7919b6539b8ea", 
+    "person_name": "???", 
+    "tag": ""
+}
+
+创建Faceset
+{
+    "added_face": 0, 
+    "faceset_id": "725d55aa22ebe4c1073ac0d0584baf0e", 
+    "faceset_name": "FacesetTest1", 
+    "tag": ""
+}
+
+
+添加到Persion
+{
+    "added": 1, 
+    "success": true
+}
+
+添加到Faceset
+{
+    "added": 1, 
+    "success": true
+}
+
+检测Pic4
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 6, 
+                    "value": 11
+                }, 
+                "gender": {
+                    "confidence": 71.3037, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 99.6339, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "c7379cc89300baec5afa9eb9266c2123", 
+            "position": {
+                "center": {
+                    "x": 64.680233, 
+                    "y": 32.0
+                }, 
+                "eye_left": {
+                    "x": 50.999128, 
+                    "y": 25.5684
+                }, 
+                "eye_right": {
+                    "x": 71.031395, 
+                    "y": 23.1676
+                }, 
+                "height": 28.0, 
+                "mouth_left": {
+                    "x": 53.648256, 
+                    "y": 40.2094
+                }, 
+                "mouth_right": {
+                    "x": 70.809302, 
+                    "y": 37.3708
+                }, 
+                "nose": {
+                    "x": 63.519767, 
+                    "y": 34.3864
+                }, 
+                "width": 40.988372
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 500, 
+    "img_id": "4bb1dda115f080add85728350034a976", 
+    "img_width": 344, 
+    "session_id": "636e470c045849c5acbd0e8eb9694f45", 
+    "url": null
+}
+
+添加到Persion
+{
+    "added": 1, 
+    "success": true
+}
+
+添加到Faceset
+{
+    "added": 1, 
+    "success": true
+}
+
+创建组
+{
+    "added_person": 0, 
+    "group_id": "91d2f283b161edc36bd84c2daab9b38b", 
+    "group_name": "Face++Test", 
+    "tag": ""
+}
+
+把Person添加到组
+{
+    "added": 1, 
+    "success": true
+}
+{
+    "face": [
+        {
+            "face_id": "2bc15dd0fbaf99e958b46e7ec4b7450d", 
+            "tag": ""
+        }, 
+        {
+            "face_id": "c7379cc89300baec5afa9eb9266c2123", 
+            "tag": ""
+        }
+    ], 
+    "group": [
+        {
+            "group_id": "91d2f283b161edc36bd84c2daab9b38b", 
+            "group_name": "Face++Test", 
+            "tag": ""
+        }
+    ], 
+    "person_id": "1c8fc38ce833b747dda7919b6539b8ea", 
+    "person_name": "???", 
+    "tag": ""
+}
+
+{
+    "component_similarity": {
+        "eye": 32.521137, 
+        "eyebrow": 16.196346, 
+        "mouth": 80.106369, 
+        "nose": 52.135281
+    }, 
+    "session_id": "0f9d6ee73ce444c8b7276275ee52f99f", 
+    "similarity": 43.895031
+}
+
+检测pic5
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 5, 
+                    "value": 18
+                }, 
+                "gender": {
+                    "confidence": 86.7653, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 99.8407, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "8192a21d4429e6b13a549fec880e5ffb", 
+            "position": {
+                "center": {
+                    "x": 56.155779, 
+                    "y": 36.416667
+                }, 
+                "eye_left": {
+                    "x": 47.238442, 
+                    "y": 32.44
+                }, 
+                "eye_right": {
+                    "x": 63.284673, 
+                    "y": 29.514
+                }, 
+                "height": 22.833333, 
+                "mouth_left": {
+                    "x": 50.188693, 
+                    "y": 42.724167
+                }, 
+                "mouth_right": {
+                    "x": 65.641457, 
+                    "y": 40.568833
+                }, 
+                "nose": {
+                    "x": 59.700503, 
+                    "y": 38.095167
+                }, 
+                "width": 34.422111
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 906, 
+    "img_id": "d0b3fcb15601440d4dd56edda3abe341", 
+    "img_width": 602, 
+    "session_id": "e144706e637b4ee6852f79e993f86e12", 
+    "url": null
+}
+
+
+检测pic6
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 5, 
+                    "value": 16
+                }, 
+                "gender": {
+                    "confidence": 98.8205, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 99.9875, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "33b4dd89e344306954bee19cb0789a32", 
+            "position": {
+                "center": {
+                    "x": 59.9, 
+                    "y": 39.333333
+                }, 
+                "eye_left": {
+                    "x": 53.5658, 
+                    "y": 30.413067
+                }, 
+                "eye_right": {
+                    "x": 66.523, 
+                    "y": 30.9944
+                }, 
+                "height": 33.333333, 
+                "mouth_left": {
+                    "x": 52.9128, 
+                    "y": 45.543467
+                }, 
+                "mouth_right": {
+                    "x": 66.4486, 
+                    "y": 47.048533
+                }, 
+                "nose": {
+                    "x": 60.1542, 
+                    "y": 42.972267
+                }, 
+                "width": 25.0
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 375, 
+    "img_id": "38f6fe49814d2c0aa9153e16b8f82af6", 
+    "img_width": 500, 
+    "session_id": "1a5316e956924311887d921acd3ff76d", 
+    "url": null
+}
+
+检测pic7
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 5, 
+                    "value": 19
+                }, 
+                "gender": {
+                    "confidence": 64.4601, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 99.9796, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "b8f0a3e2f161e6d616edf8687a7df991", 
+            "position": {
+                "center": {
+                    "x": 50.457666, 
+                    "y": 36.75
+                }, 
+                "eye_left": {
+                    "x": 40.573913, 
+                    "y": 31.430333
+                }, 
+                "eye_right": {
+                    "x": 57.725858, 
+                    "y": 31.456
+                }, 
+                "height": 22.166667, 
+                "mouth_left": {
+                    "x": 42.629977, 
+                    "y": 43.055
+                }, 
+                "mouth_right": {
+                    "x": 56.889931, 
+                    "y": 42.9335
+                }, 
+                "nose": {
+                    "x": 48.85286, 
+                    "y": 38.900333
+                }, 
+                "width": 30.434783
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 1024, 
+    "img_id": "5dbff03569ebf5cba093894c1d43ae56", 
+    "img_width": 747, 
+    "session_id": "014981ea321845cabd793c25838ce9b7", 
+    "url": null
+}
+
+pic8
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 5, 
+                    "value": 19
+                }, 
+                "gender": {
+                    "confidence": 92.4292, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 99.6366, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "a0e5510a80a8cdf8624960a438fa045b", 
+            "position": {
+                "center": {
+                    "x": 48.780488, 
+                    "y": 36.432161
+                }, 
+                "eye_left": {
+                    "x": 40.469817, 
+                    "y": 29.755025
+                }, 
+                "eye_right": {
+                    "x": 55.12561, 
+                    "y": 29.835176
+                }, 
+                "height": 24.120603, 
+                "mouth_left": {
+                    "x": 43.266768, 
+                    "y": 42.109296
+                }, 
+                "mouth_right": {
+                    "x": 56.310976, 
+                    "y": 41.901759
+                }, 
+                "nose": {
+                    "x": 46.373476, 
+                    "y": 39.245477
+                }, 
+                "width": 29.268293
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 398, 
+    "img_id": "abd0b9831ebb3a782daabd76d55e6ffd", 
+    "img_width": 328, 
+    "session_id": "347acf9a5a7f4e6a9e72602f05822307", 
+    "url": null
+}
+
+pic9
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 6, 
+                    "value": 13
+                }, 
+                "gender": {
+                    "confidence": 75.5906, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 99.6637, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "494024de84f7f6999d32494ff5bc0263", 
+            "position": {
+                "center": {
+                    "x": 61.5, 
+                    "y": 41.111111
+                }, 
+                "eye_left": {
+                    "x": 53.522333, 
+                    "y": 32.273111
+                }, 
+                "eye_right": {
+                    "x": 66.5065, 
+                    "y": 32.058
+                }, 
+                "height": 33.777778, 
+                "mouth_left": {
+                    "x": 55.685833, 
+                    "y": 49.533778
+                }, 
+                "mouth_right": {
+                    "x": 67.710333, 
+                    "y": 49.824
+                }, 
+                "nose": {
+                    "x": 58.785333, 
+                    "y": 44.753333
+                }, 
+                "width": 25.333333
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 600, 
+    "img_id": "1e1dcddd3cb49845180518650f205597", 
+    "img_width": 800, 
+    "session_id": "f1b74d01cd024183ba2bffeda243574e", 
+    "url": null
+}
+
+pic10
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 5, 
+                    "value": 15
+                }, 
+                "gender": {
+                    "confidence": 78.7529, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 96.265, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "5227642c4477d2b4c57764017ed1d91b", 
+            "position": {
+                "center": {
+                    "x": 51.888889, 
+                    "y": 27.583333
+                }, 
+                "eye_left": {
+                    "x": 49.499556, 
+                    "y": 22.392333
+                }, 
+                "eye_right": {
+                    "x": 62.948667, 
+                    "y": 22.889333
+                }, 
+                "height": 19.833333, 
+                "mouth_left": {
+                    "x": 46.309333, 
+                    "y": 31.798667
+                }, 
+                "mouth_right": {
+                    "x": 59.617333, 
+                    "y": 32.344333
+                }, 
+                "nose": {
+                    "x": 56.316889, 
+                    "y": 30.053
+                }, 
+                "width": 26.444444
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 600, 
+    "img_id": "075d470ab99ffca59c1fd3673dff28dd", 
+    "img_width": 450, 
+    "session_id": "732c2c1f0b8943968d18332a39e88d8b", 
+    "url": null
+}
+
+pic11
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 7, 
+                    "value": 13
+                }, 
+                "gender": {
+                    "confidence": 79.9518, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 99.3158, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "2c0f6805bfd323e7dfcbce3f9ebd4780", 
+            "position": {
+                "center": {
+                    "x": 51.25, 
+                    "y": 20.166667
+                }, 
+                "eye_left": {
+                    "x": 45.66125, 
+                    "y": 17.555667
+                }, 
+                "eye_right": {
+                    "x": 55.3485, 
+                    "y": 16.716833
+                }, 
+                "height": 12.333333, 
+                "mouth_left": {
+                    "x": 47.51625, 
+                    "y": 23.492333
+                }, 
+                "mouth_right": {
+                    "x": 55.629, 
+                    "y": 23.212333
+                }, 
+                "nose": {
+                    "x": 49.47775, 
+                    "y": 20.9675
+                }, 
+                "width": 18.5
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 750, 
+    "img_id": "243a4240164f8eec6ee91b13a2d0f97d", 
+    "img_width": 500, 
+    "session_id": "2ef46ed91c974f95ab22afab5de8de3a", 
+    "url": null
+}
+
+pic12
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 6, 
+                    "value": 11
+                }, 
+                "gender": {
+                    "confidence": 71.3037, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 99.6339, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "512904976a4383022150e4b39c0e4786", 
+            "position": {
+                "center": {
+                    "x": 64.680233, 
+                    "y": 32.0
+                }, 
+                "eye_left": {
+                    "x": 50.999128, 
+                    "y": 25.5684
+                }, 
+                "eye_right": {
+                    "x": 71.031395, 
+                    "y": 23.1676
+                }, 
+                "height": 28.0, 
+                "mouth_left": {
+                    "x": 53.648256, 
+                    "y": 40.2094
+                }, 
+                "mouth_right": {
+                    "x": 70.809302, 
+                    "y": 37.3708
+                }, 
+                "nose": {
+                    "x": 63.519767, 
+                    "y": 34.3864
+                }, 
+                "width": 40.988372
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 500, 
+    "img_id": "ba8423e998bcbaffd42d3ee251ead87e", 
+    "img_width": 344, 
+    "session_id": "48b563661e2e4baeb69e33b92ee4a30f", 
+    "url": null
+}
+
+pic13
+{
+    "face": [
+        {
+            "attribute": {
+                "age": {
+                    "range": 6, 
+                    "value": 16
+                }, 
+                "gender": {
+                    "confidence": 77.9085, 
+                    "value": "Female"
+                }, 
+                "race": {
+                    "confidence": 99.8218, 
+                    "value": "Asian"
+                }
+            }, 
+            "face_id": "989164dcd18767a6233a9f97f8d05c10", 
+            "position": {
+                "center": {
+                    "x": 60.023585, 
+                    "y": 32.333333
+                }, 
+                "eye_left": {
+                    "x": 49.837264, 
+                    "y": 29.062167
+                }, 
+                "eye_right": {
+                    "x": 62.583491, 
+                    "y": 26.953167
+                }, 
+                "height": 19.666667, 
+                "mouth_left": {
+                    "x": 54.264623, 
+                    "y": 38.035833
+                }, 
+                "mouth_right": {
+                    "x": 65.074764, 
+                    "y": 37.073833
+                }, 
+                "nose": {
+                    "x": 53.909906, 
+                    "y": 33.839
+                }, 
+                "width": 28.066038
+            }, 
+            "tag": ""
+        }
+    ], 
+    "img_height": 707, 
+    "img_id": "4d624f261dfb496c49e3d432b9e0eb4d", 
+    "img_width": 500, 
+    "session_id": "9a6691e51f664ca48e7d698a846b8c48", 
+    "url": null
+}
+
+
+DetectResp [session_id=a4d9ab1476d7444db8fdd6c134b99688, image_id=9aa68e31bc6bf5f3872f9686c4df8165, url=null, img_height=450, img_width=300, face=[Face [face_id=db12a999bae5f0b94f1ee82d0c2cf258, position=Position [width=37.0, height=24.666668, center=com.xiaoying.faceplusplus.api.entity.PointF@4769f2d7, eye_left=com.xiaoying.faceplusplus.api.entity.PointF@7cc625e1, eye_right=com.xiaoying.faceplusplus.api.entity.PointF@34e116c6, mouth_left=com.xiaoying.faceplusplus.api.entity.PointF@259e3c49, mouth_right=com.xiaoying.faceplusplus.api.entity.PointF@3787efea, nose=null], attribute=Attribute [gender=Gender [value=Female, confidence=77.4861], age=Age [value=16, range=5], race=Race [value=Asian, confidence=97.9257]], tag=]]]
+
+
+

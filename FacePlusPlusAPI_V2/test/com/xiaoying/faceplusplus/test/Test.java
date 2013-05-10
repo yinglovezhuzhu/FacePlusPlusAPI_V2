@@ -31,7 +31,7 @@ public class Test {
 		FaceService faceService = new FaceService(client);
 		try {
 //			System.out.println(faceService.detect(new File("/home/xiaoying/pic3.jpg")));
-			System.out.println(faceService.detect("http://www.taihainet.com/news/UploadFiles_6334/201009/20100904072320558.jpg"));
+			System.out.println(faceService.detect("http://www.yn.xinhuanet.com/ent/2008-11/11/xin_1331105110914078108772.jpg"));
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
