@@ -38,10 +38,12 @@ public class HttpUtil {
 		Set<String> keys = params.keySet();
 		for (String key : keys) {
 			Object obj = params.get(key);
-			if (obj instanceof File) {
+			if (obj instanceof File && obj != null) {
 				mulEntity.addPart(key, new FileBody((File) obj));
 			} else {
-				mulEntity.addPart(key, new StringBody(obj.toString()));
+				if(!StringUtil.isEmpty(obj.toString())) {
+					mulEntity.addPart(key, new StringBody(obj.toString()));
+				}
 			}
 		}
 		post.setEntity(mulEntity);
