@@ -1,22 +1,26 @@
 /*
- * 文件名：Person.java
+ * 文件名：PersonGetInfoResp.java
  * 版权：<版权>
  * 描述：<描述>
  * 创建人：xiaoying
- * 创建时间：2013-5-10
+ * 创建时间：2013-5-13
  * 修改人：xiaoying
- * 修改时间：2013-5-10
+ * 修改时间：2013-5-13
  * 版本：v1.0
  */
-package com.xiaoying.faceplusplus.api.entity;
+package com.xiaoying.faceplusplus.api.entity.response.person;
 
 import java.util.List;
 
+import com.xiaoying.faceplusplus.api.entity.Face;
+import com.xiaoying.faceplusplus.api.entity.Group;
+import com.xiaoying.faceplusplus.api.entity.response.BaseResponse;
+
 /**
- * 功能：人实体类
+ * 功能：Person信息查询返回实体类
  * @author xiaoying
  */
-public class Person {
+public class PersonGetInfoResp extends BaseResponse {
 	private String person_name;	//相应person的name
 	private String person_id;	//相应person的id
 	private String tag;			//person相关的tag

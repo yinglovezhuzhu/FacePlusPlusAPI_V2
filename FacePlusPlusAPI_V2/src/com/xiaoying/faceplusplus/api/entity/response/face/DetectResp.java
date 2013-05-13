@@ -8,18 +8,19 @@
  * 修改时间：2013-5-10
  * 版本：v1.0
  */
-package com.xiaoying.faceplusplus.api.response;
+package com.xiaoying.faceplusplus.api.entity.response.face;
 
 import java.util.List;
 
 import com.xiaoying.faceplusplus.api.entity.Face;
+import com.xiaoying.faceplusplus.api.entity.response.BaseResponse;
 
 /**
  * 功能：人脸检测返回实体类
  * 
  * @author xiaoying
  */
-public class DetectResp {
+public class DetectResp extends BaseResponse {
 	private String session_id;
 	private String image_id;
 	private String url;
@@ -62,10 +63,12 @@ public class DetectResp {
 	public void setFace(List<Face> face) {
 		this.face = face;
 	}
+	
 	@Override
 	public String toString() {
 		return "DetectResp [session_id=" + session_id + ", image_id="
 				+ image_id + ", url=" + url + ", img_height=" + img_height
-				+ ", img_width=" + img_width + ", face=" + face + "]";
+				+ ", img_width=" + img_width + ", face=" + face + ", error="
+				+ error + ", error_code=" + error_code + "]";
 	}
 }

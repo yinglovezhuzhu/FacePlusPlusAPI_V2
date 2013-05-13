@@ -23,17 +23,18 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.xiaoying.faceplusplus.api.config.Config;
+
 /**
  * 功能：网络数据传输工具类
  * @author xiaoying
  */
 public class HttpUtil {
 	
-	public static final String BASE_URL = "https://apicn.faceplusplus.com/v2";
-
+	
 	public static HttpResponse doPost(String actionPath, Map<String, Object> params) throws ClientProtocolException, IOException {
 		DefaultHttpClient client = new DefaultHttpClient();
-		HttpPost post = new HttpPost(BASE_URL + actionPath);
+		HttpPost post = new HttpPost(Config.BASE_URL + actionPath);
 		MultipartEntity mulEntity = new MultipartEntity();
 		Set<String> keys = params.keySet();
 		for (String key : keys) {
@@ -41,7 +42,7 @@ public class HttpUtil {
 			if (obj instanceof File && obj != null) {
 				mulEntity.addPart(key, new FileBody((File) obj));
 			} else {
-				if(!StringUtil.isEmpty(obj.toString())) {
+				if(obj != null && !StringUtil.isEmpty(obj.toString())) {
 					mulEntity.addPart(key, new StringBody(obj.toString()));
 				}
 			}

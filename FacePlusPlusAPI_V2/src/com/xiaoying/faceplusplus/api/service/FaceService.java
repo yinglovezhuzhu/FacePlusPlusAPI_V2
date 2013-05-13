@@ -10,7 +10,6 @@
  */
 package com.xiaoying.faceplusplus.api.service;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,11 +25,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 
-import com.xiaoying.faceplusplus.api.client.Client;
+import com.xiaoying.faceplusplus.api.cliet.Client;
+import com.xiaoying.faceplusplus.api.config.Config;
 import com.xiaoying.faceplusplus.api.entity.Face;
 import com.xiaoying.faceplusplus.api.entity.PointF;
-import com.xiaoying.faceplusplus.api.response.DetectResp;
+import com.xiaoying.faceplusplus.api.entity.request.face.DetectFaceReq;
+import com.xiaoying.faceplusplus.api.entity.response.face.DetectResp;
 import com.xiaoying.faceplusplus.api.utils.HttpUtil;
+import com.xiaoying.faceplusplus.api.utils.Log;
 import com.xiaoying.faceplusplus.api.utils.StringUtil;
 
 /**
@@ -45,67 +47,60 @@ public class FaceService extends BaseService {
 
 	/**
 	 * 人脸检测
-	 * @param file 图片文件（本地图片）
+	 * @param body 人脸检测请求体
 	 * @return
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public DetectResp detect(File file) throws ClientProtocolException, IOException {
-		if(!file.exists()) {
-			throw new FileNotFoundException("File " + file.getPath() + "not found.");
+	public DetectResp detect(DetectFaceReq body) throws ClientProtocolException, IOException {
+		if(StringUtil.isEmpty(body.getUrl()) && body.getImg() == null) {
+			throw new IllegalArgumentException("Must set a image url or image file");
 		}
-		if(StringUtil.isEmpty(client.getAppKey()) || StringUtil.isEmpty(client.getAppSecret())) {
-			throw new IllegalArgumentException("APP_KEY and APP_Secret must be not null.");
-		}
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("img", file);
-		params.put("api_key", client.getAppKey());
-		params.put("api_secret", client.getAppSecret());
-		return getResponse(params);
-	}
-	
-	/**
-	 * 人脸检测
-	 * @param url 图片url（网络图片）
-	 * @return
-	 * @throws ClientProtocolException
-	 * @throws IOException
-	 */
-	public DetectResp detect(String url) throws ClientProtocolException, IOException {
-		if(StringUtil.isEmpty(client.getAppKey()) || StringUtil.isEmpty(client.getAppSecret())) {
-			throw new IllegalArgumentException("APP_KEY and APP_Secret must be not null.");
+		if(body.getImg() != null && !body.getImg().exists()) {
+			throw new FileNotFoundException("File " + body.getImg().getPath() + "not found.");
 		}
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("url", url);
 		params.put("api_key", client.getAppKey());
 		params.put("api_secret", client.getAppSecret());
+		params.put("img", body.getImg());
+		params.put("url", body.getUrl());
+		params.put("mode", body.getMode());
+		params.put("attribute", body.getAttribute());
+		params.put("tag", body.getTag());
+		params.put("async", body.isAsync());
 		return getResponse(params);
 	}
 	
 	@SuppressWarnings("unchecked")
 	private DetectResp getResponse(Map<String, Object> params) throws ClientProtocolException, IOException {
-		HttpResponse resp = HttpUtil.doPost("/detection/detect", params);
+		HttpResponse resp = HttpUtil.doPost(Config.PATH_DETECT, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
+		Log.i(json.toString());
 		DetectResp result = new DetectResp();
-		result.setSession_id(json.getString("session_id"));
-		result.setImage_id(json.getString("img_id"));
-		result.setUrl(json.getString("url"));
-		result.setImg_width(json.getInt("img_width"));
-		result.setImg_height(json.getInt("img_height"));
-		JSONArray faceArray = json.getJSONArray("face");
-		JSONObject faceObj = null;
-		List<Face> faces = new ArrayList<Face>();
-		Face face = null;
-		for(Iterator<JSONObject> i = faceArray.iterator(); i.hasNext(); ) {
-			faceObj = JSONObject.fromObject(i.next());
-			face = new Face();
-			face.setFace_id(faceObj.getString("face_id"));
-			face.setTag(faceObj.getString("tag"));
-			face.setAttribute(getAttribute(faceObj.getJSONObject("attribute")));
-			face.setPosition(getPosition(faceObj.getJSONObject("position")));
-			faces.add(face);
+		if(json.containsKey("session_id")) {
+			result.setSession_id(json.getString("session_id"));
+			result.setImage_id(json.getString("img_id"));
+			result.setUrl(json.getString("url"));
+			result.setImg_width(json.getInt("img_width"));
+			result.setImg_height(json.getInt("img_height"));
+			JSONArray faceArray = json.getJSONArray("face");
+			JSONObject faceObj = null;
+			List<Face> faces = new ArrayList<Face>();
+			Face face = null;
+			for(Iterator<JSONObject> i = faceArray.iterator(); i.hasNext(); ) {
+				faceObj = JSONObject.fromObject(i.next());
+				face = new Face();
+				face.setFace_id(faceObj.getString("face_id"));
+				face.setTag(faceObj.getString("tag"));
+				face.setAttribute(getAttribute(faceObj.getJSONObject("attribute")));
+				face.setPosition(getPosition(faceObj.getJSONObject("position")));
+				faces.add(face);
+			}
+			result.setFace(faces);
+		} else {
+			result.setError(json.getString("error"));
+			result.setError_code(json.getInt("error_code"));
 		}
-		result.setFace(faces);
 		return result;
 	}
 	

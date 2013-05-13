@@ -10,24 +10,21 @@
  */
 package com.xiaoying.faceplusplus.api.service;
 
-import com.xiaoying.faceplusplus.api.client.Client;
+import com.xiaoying.faceplusplus.api.cliet.Client;
 
 /**
- * 功能：
+ * 功能：服务Base类
  * @author xiaoying
  */
 public class BaseService {
-	protected Client client;
+	protected Client client = null;
 	
 	public BaseService(Client client) {
 		this.client = client;
 	}
-	
-	protected void setClient(Client client) {
-		this.client = client;
-	}
-	
-	protected Client getClient() {
-		return this.client;
+
+	@Override
+	public String toString() {
+		return "BaseService [client=" + client + "]";
 	}
 }
