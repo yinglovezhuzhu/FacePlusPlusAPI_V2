@@ -12,6 +12,7 @@ package com.xiaoying.faceplusplus.api.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Set;
 
@@ -43,7 +44,7 @@ public class HttpUtil {
 				mulEntity.addPart(key, new FileBody((File) obj));
 			} else {
 				if(obj != null && !StringUtil.isEmpty(obj.toString())) {
-					mulEntity.addPart(key, new StringBody(obj.toString()));
+					mulEntity.addPart(key, new StringBody(obj.toString(), Charset.forName(Config.CHART_SET)));
 				}
 			}
 		}

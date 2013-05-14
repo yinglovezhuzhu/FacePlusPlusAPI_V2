@@ -26,7 +26,6 @@ import org.apache.http.util.EntityUtils;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
 import com.xiaoying.faceplusplus.api.config.Config;
-import com.xiaoying.faceplusplus.api.entity.Face;
 import com.xiaoying.faceplusplus.api.entity.Person;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupAddPersonReq;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupCreateReq;

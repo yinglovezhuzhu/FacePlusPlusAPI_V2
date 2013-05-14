@@ -60,6 +60,7 @@ public class GroupSetInfoReq extends BaseRequest {
 	}
 	
 	/**
+	 * (可选)
 	 * 新的group_name
 	 * @return
 	 */
@@ -68,6 +69,7 @@ public class GroupSetInfoReq extends BaseRequest {
 	}
 	
 	/**
+	 * (可选)
 	 * 新的group_name
 	 * @param name
 	 */
@@ -76,6 +78,7 @@ public class GroupSetInfoReq extends BaseRequest {
 	}
 	
 	/**
+	 * (可选)
 	 * 新的tag
 	 * @return
 	 */
@@ -84,6 +87,7 @@ public class GroupSetInfoReq extends BaseRequest {
 	}
 	
 	/**
+	 * (可选)
 	 * 新的tag
 	 * @param tag
 	 */

@@ -1,12 +1,12 @@
 /*
- * 文件名：Test.java
- * 版权：<版权>
- * 描述：<描述>
- * 创建人：xiaoying
- * 创建时间：2013-5-10
- * 修改人：xiaoying
- * 修改时间：2013-5-10
- * 版本：v1.0
+ * 鏂囦欢鍚嶏細Test.java
+ * 鐗堟潈锛�鐗堟潈>
+ * 鎻忚堪锛�鎻忚堪>
+ * 鍒涘缓浜猴細xiaoying
+ * 鍒涘缓鏃堕棿锛�013-5-10
+ * 淇敼浜猴細xiaoying
+ * 淇敼鏃堕棿锛�013-5-10
+ * 鐗堟湰锛歷1.0
  */
 package com.xiaoying.faceplusplus.test;
 
@@ -17,6 +17,12 @@ import org.apache.http.client.ClientProtocolException;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
 import com.xiaoying.faceplusplus.api.entity.request.face.DetectFaceReq;
+import com.xiaoying.faceplusplus.api.entity.request.faceset.FacesetAddFaceReq;
+import com.xiaoying.faceplusplus.api.entity.request.faceset.FacesetCreateReq;
+import com.xiaoying.faceplusplus.api.entity.request.faceset.FacesetDeleteReq;
+import com.xiaoying.faceplusplus.api.entity.request.faceset.FacesetGetInfoReq;
+import com.xiaoying.faceplusplus.api.entity.request.faceset.FacesetRemoveFaceReq;
+import com.xiaoying.faceplusplus.api.entity.request.faceset.FacesetSetInfoReq;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupAddPersonReq;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupCreateReq;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupDeleteReq;
@@ -31,12 +37,13 @@ import com.xiaoying.faceplusplus.api.entity.request.person.PersonSetInfoReq;
 import com.xiaoying.faceplusplus.api.entity.response.group.GroupGetInfoResp;
 import com.xiaoying.faceplusplus.api.entity.response.person.PersonCreateResp;
 import com.xiaoying.faceplusplus.api.service.FaceService;
+import com.xiaoying.faceplusplus.api.service.FacesetService;
 import com.xiaoying.faceplusplus.api.service.GroupService;
 import com.xiaoying.faceplusplus.api.service.PersonService;
 import com.xiaoying.faceplusplus.api.utils.Log;
 
 /**
- * 功能：测试类
+ * 鍔熻兘锛氭祴璇曠被
  * @author xiaoying
  */
 public class Test {
@@ -86,14 +93,14 @@ public class Test {
 			person.setPersonInfo(req);*/
 			
 			/*PersonGetInfoReq req = new PersonGetInfoReq();
-			req.setPerson_id("fed5dddcbdc63d9c2358d8d1a4b16dd6");
+			req.setPerson_name("张娜拉");
 			person.getPersonInfo(req);*/
 			
 			
 			GroupService group = new GroupService(client);
 			
 			/*GroupCreateReq req = new GroupCreateReq();
-			req.setGroup_name("My friend6");
+			req.setGroup_name("朋友");
 			req.setPerson_id("fed5dddcbdc63d9c2358d8d1a4b16dd6");
 			System.out.println(group.createGroup(req));*/
 			
@@ -112,9 +119,41 @@ public class Test {
 			req.setTag("This is all my Best frend");
 			group.setGroupInfo(req);*/
 			
-			GroupGetInfoReq req = new GroupGetInfoReq();
-			req.setGroup_name("My Best Friend");
-			group.getGroupInfo(req);
+//			GroupGetInfoReq req = new GroupGetInfoReq();
+//			req.setGroup_name("My Best Friend");
+//			group.getGroupInfo(req);
+			
+			FacesetService faceset = new FacesetService(client);
+			
+			/*FacesetCreateReq req = new FacesetCreateReq();
+			req.setFaceset_name("测试的人脸");
+			req.setFace_id("2bc15dd0fbaf99e958b46e7ec4b7450d");
+			faceset.createFaceset(req);*/
+			
+			/*FacesetDeleteReq req = new FacesetDeleteReq();
+			req.setFaceset_id("2bc15dd0fbaf99e958b46e7ec4b7450d");
+			faceset.deleteFaceset(req);*/
+			
+			/*FacesetAddFaceReq req = new FacesetAddFaceReq();
+			req.setFaceset_id("d83d0a5c9789ff3919084030d741998f");
+			req.setFace_id("8192a21d4429e6b13a549fec880e5ffb,33b4dd89e344306954bee19cb0789a32");
+			faceset.addFace(req);*/
+			
+			/*FacesetRemoveFaceReq req = new FacesetRemoveFaceReq();
+			req.setFaceset_id("d83d0a5c9789ff3919084030d741998f");
+			req.setFace_id("8192a21d4429e6b13a549fec880e5ffb,33b4dd89e344306954bee19cb0789a32");
+			faceset.removeFace(req);*/
+
+			/*FacesetSetInfoReq req = new FacesetSetInfoReq();
+			req.setFaceset_name("测试的人脸");
+			req.setName("测试的人脸--测试");
+			req.setTag("这是用来测试的Faceset");
+			faceset.setFacesetInfo(req);*/
+//			{"faceset_id":"d83d0a5c9789ff3919084030d741998f","faceset_name":"测试的人脸--测试","tag":"这是用来测试的Faceset"}
+			
+			FacesetGetInfoReq req = new FacesetGetInfoReq();
+			req.setFaceset_id("d83d0a5c9789ff3919084030d741998f");
+			faceset.getFacesetInfo(req);
 			
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

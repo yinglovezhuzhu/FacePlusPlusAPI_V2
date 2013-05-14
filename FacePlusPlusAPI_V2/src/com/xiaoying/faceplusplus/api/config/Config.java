@@ -14,6 +14,8 @@ package com.xiaoying.faceplusplus.api.config;
  * @author xiaoying
  */
 public class Config {
+	
+	public static final String CHART_SET = "UTF-8";
 
 	public static final String BASE_URL = "https://apicn.faceplusplus.com/v2";
 	
@@ -46,5 +48,16 @@ public class Config {
 	
 	public static final String PATH_GROUP_GET_INFO = "/group/get_info";
 	
-//	public static final String PATH_GROUP_
+	//Faceset
+	public static final String PATH_FACESET_CREATE = "/faceset/create";
+
+	public static final String PATH_FACESET_DELETE = "/faceset/delete";
+	
+	public static final String PATH_FACESET_ADD_FACE = "/faceset/add_face";
+	
+	public static final String PATH_FACESET_REMOVE_FACE = "/faceset/remove_face";
+	
+	public static final String PATH_FACESET_SET_INFO = "/faceset/set_info";
+	
+	public static final String PATH_FACESET_GET_INFO = "/faceset/get_info";
 }
