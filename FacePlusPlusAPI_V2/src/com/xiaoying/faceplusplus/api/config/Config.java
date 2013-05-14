@@ -60,4 +60,7 @@ public class Config {
 	public static final String PATH_FACESET_SET_INFO = "/faceset/set_info";
 	
 	public static final String PATH_FACESET_GET_INFO = "/faceset/get_info";
+
+	//Grouping
+	public static final String PATH_GROUPING = "/grouping/grouping";
 }

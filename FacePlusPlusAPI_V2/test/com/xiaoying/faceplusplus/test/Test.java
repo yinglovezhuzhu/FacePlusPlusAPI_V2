@@ -28,6 +28,7 @@ import com.xiaoying.faceplusplus.api.entity.request.group.GroupCreateReq;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupDeleteReq;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupGetInfoReq;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupSetInfoReq;
+import com.xiaoying.faceplusplus.api.entity.request.grouping.GroupingFaceReq;
 import com.xiaoying.faceplusplus.api.entity.request.person.PersonAddFaceReq;
 import com.xiaoying.faceplusplus.api.entity.request.person.PersonCreateReq;
 import com.xiaoying.faceplusplus.api.entity.request.person.PersonDeleteReq;
@@ -39,6 +40,7 @@ import com.xiaoying.faceplusplus.api.entity.response.person.PersonCreateResp;
 import com.xiaoying.faceplusplus.api.service.FaceService;
 import com.xiaoying.faceplusplus.api.service.FacesetService;
 import com.xiaoying.faceplusplus.api.service.GroupService;
+import com.xiaoying.faceplusplus.api.service.GroupingService;
 import com.xiaoying.faceplusplus.api.service.PersonService;
 import com.xiaoying.faceplusplus.api.utils.Log;
 
@@ -151,9 +153,14 @@ public class Test {
 			faceset.setFacesetInfo(req);*/
 //			{"faceset_id":"d83d0a5c9789ff3919084030d741998f","faceset_name":"测试的人脸--测试","tag":"这是用来测试的Faceset"}
 			
-			FacesetGetInfoReq req = new FacesetGetInfoReq();
+			/*FacesetGetInfoReq req = new FacesetGetInfoReq();
 			req.setFaceset_id("d83d0a5c9789ff3919084030d741998f");
-			faceset.getFacesetInfo(req);
+			faceset.getFacesetInfo(req);*/
+			
+			GroupingService grouping = new GroupingService(client);
+			GroupingFaceReq req = new GroupingFaceReq();
+			req.setFaceset_id("d83d0a5c9789ff3919084030d741998f");
+			grouping.groupingFace(req);
 			
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
