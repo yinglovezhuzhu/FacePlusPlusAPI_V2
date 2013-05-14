@@ -29,6 +29,8 @@ import com.xiaoying.faceplusplus.api.entity.request.group.GroupDeleteReq;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupGetInfoReq;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupSetInfoReq;
 import com.xiaoying.faceplusplus.api.entity.request.grouping.GroupingFaceReq;
+import com.xiaoying.faceplusplus.api.entity.request.info.InfoGetFaceReq;
+import com.xiaoying.faceplusplus.api.entity.request.info.InfoGetImageReq;
 import com.xiaoying.faceplusplus.api.entity.request.person.PersonAddFaceReq;
 import com.xiaoying.faceplusplus.api.entity.request.person.PersonCreateReq;
 import com.xiaoying.faceplusplus.api.entity.request.person.PersonDeleteReq;
@@ -41,6 +43,7 @@ import com.xiaoying.faceplusplus.api.service.FaceService;
 import com.xiaoying.faceplusplus.api.service.FacesetService;
 import com.xiaoying.faceplusplus.api.service.GroupService;
 import com.xiaoying.faceplusplus.api.service.GroupingService;
+import com.xiaoying.faceplusplus.api.service.InfoService;
 import com.xiaoying.faceplusplus.api.service.PersonService;
 import com.xiaoying.faceplusplus.api.utils.Log;
 
@@ -56,14 +59,15 @@ public class Test {
 		
 		Client client = new Client(APP_KEY, APP_SECRET);
 		try {
-			/*FaceService faceService = new FaceService(APP_KEY, APP_SECRET);
+			/*FaceService faceService = new FaceService(client);
 			DetectFaceReq request = new DetectFaceReq();
-		request.setUrl("http://www.yn.xinhuanet.com/ent/2008-11/11/xin_1331105110914078108772.jp");
-//			request.setImg(new File("/home/xiaoying/pic3.jpg"));
-			System.out.println(faceService.detect(request));*/
+//		request.setUrl("http://www.yn.xinhuanet.com/ent/2008-11/11/xin_1331105110914078108772.jp");
+			request.setImg(new File("/home/xiaoying/pic18.jpg"));
+			System.out.println(faceService.detect(request));
 			
-			PersonService person = new PersonService(client);
-			
+			PersonService person = new PersonService(client);*/
+//			{"face":[{"attribute":{"age":{"range":5,"value":13},"gender":{"confidence":58.5597,"value":"Female"},"race":{"confidence":99.9887,"value":"Asian"}},"face_id":"7ba1ae5cd5fc5892d17539fb975fae5a","position":{"center":{"x":56.416668,"y":37.333332},"eye_left":{"x":46.695,"y":27.863333},"eye_right":{"x":63.146168,"y":24.496445},"height":40,"mouth_left":{"x":48.730167,"y":46.57689},"mouth_right":{"x":56.72767,"y":47.309334},"nose":{"x":53.629665,"y":41.008},"width":30.166668},"tag":""},{"attribute":{"age":{"range":5,"value":19},"gender":{"confidence":56.4714,"value":"Female"},"race":{"confidence":87.2965,"value":"Asian"}},"face_id":"f196397c87c0957701c4468499e14fcc","position":{"center":{"x":26.25,"y":51.11111},"eye_left":{"x":22.220667,"y":40.927334},"eye_right":{"x":35.418,"y":45.04889},"height":37.77778,"mouth_left":{"x":21.5865,"y":61.627556},"mouth_right":{"x":32.960835,"y":61.746887},"nose":{"x":30.647667,"y":54.41111},"width":28.5},"tag":""}],"img_height":745,"img_id":"934e323a5facd0cce03d5bf3aad65dcd","img_width":993,"session_id":"3e6c761c006548f293fc3a26b85ee75f","url":null}
+
 			/*PersonCreateReq req = new PersonCreateReq();
 			req.setPerson_name("Love3");
 			System.out.println(person.createPerson(req));
@@ -157,10 +161,33 @@ public class Test {
 			req.setFaceset_id("d83d0a5c9789ff3919084030d741998f");
 			faceset.getFacesetInfo(req);*/
 			
-			GroupingService grouping = new GroupingService(client);
-			GroupingFaceReq req = new GroupingFaceReq();
-			req.setFaceset_id("d83d0a5c9789ff3919084030d741998f");
-			grouping.groupingFace(req);
+//			GroupingService grouping = new GroupingService(client);
+//			GroupingFaceReq req = new GroupingFaceReq();
+//			req.setFaceset_id("d83d0a5c9789ff3919084030d741998f");
+//			grouping.groupingFace(req);
+			
+			
+			InfoService info = new InfoService(client);
+			
+			/*InfoGetImageReq req = new InfoGetImageReq();
+			req.setImg_id("934e323a5facd0cce03d5bf3aad65dcd");
+			System.out.println(info.getImage(req));*/
+			
+			/*InfoGetFaceReq req = new InfoGetFaceReq();
+			req.setFace_id("7ba1ae5cd5fc5892d17539fb975fae5a,8192a21d4429e6b13a549fec880e5ffb");
+//			req.setFace_id("7ba1ae5cd5fc5892d17539fb975fae5a");
+			System.out.println(info.getFace(req));*/
+			
+//			System.out.println(info.getPersonList());
+			
+//			System.out.println(info.getFacsetList());
+			
+//			System.out.println(info.getGroupList());
+//			System.out.println(info.getSesson("1b4f90bee2a44f0388e92ea32bded885"));
+			
+//			System.out.println(info.getQuota());
+			
+			System.out.println(info.getApp());
 			
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

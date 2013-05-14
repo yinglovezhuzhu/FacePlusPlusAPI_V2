@@ -27,6 +27,7 @@ import com.xiaoying.faceplusplus.api.entity.request.grouping.GroupingFaceReq;
 import com.xiaoying.faceplusplus.api.entity.response.grouping.GroupingFaceResp;
 import com.xiaoying.faceplusplus.api.utils.HttpUtil;
 import com.xiaoying.faceplusplus.api.utils.Log;
+import com.xiaoying.faceplusplus.api.utils.StringUtil;
 
 /**
  * 功能：Grouping Face聚类服务类
@@ -52,6 +53,9 @@ public class GroupingService extends BaseService {
 	 * @throws IOException
 	 */
 	public GroupingFaceResp groupingFace(GroupingFaceReq body) throws ClientProtocolException, IOException {
+		if(StringUtil.isEmpty(body.getFaceset_id()) && StringUtil.isEmpty(body.getFaceset_name())) {
+			throw new IllegalArgumentException("faceset_id or faceset_name must be to set one");
+		}
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("api_key", client.getAppKey());
 		params.put("api_secret", client.getAppSecret());

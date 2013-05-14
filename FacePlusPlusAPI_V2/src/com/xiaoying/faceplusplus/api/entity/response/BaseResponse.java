@@ -16,7 +16,7 @@ package com.xiaoying.faceplusplus.api.entity.response;
 public class BaseResponse {
 
 	protected String error;	//错误描述
-	protected int error_code;	//错误代码
+	protected int error_code = 0;	//错误代码
 	
 	/**
 	 * 错误描述

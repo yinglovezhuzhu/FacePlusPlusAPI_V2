@@ -63,4 +63,22 @@ public class Config {
 
 	//Grouping
 	public static final String PATH_GROUPING = "/grouping/grouping";
+	
+	//Info
+	public static final String PATH_INFO_GET_IMAGE = "/info/get_image";
+	
+	public static final String PATH_INFO_GET_FACE = "/info/get_face";
+	
+	public static final String PATH_INFO_GET_PERSON_LIST = "/info/get_person_list";
+	
+	public static final String PATH_INFO_GET_FACESET_LIST = "/info/get_faceset_list";
+	
+	public static final String PATH_INFO_GET_GROUP_LIST = "/info/get_group_list";
+	
+	public static final String PATH_INFO_GET_SESSION = "/info/get_session";
+	
+	public static final String PATH_INFO_GET_QUOTA = "/info/get_quota";
+	
+	public static final String PATH_INFO_GET_APP = "/info/get_app";
+	
 }
