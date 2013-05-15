@@ -31,12 +31,11 @@ import com.xiaoying.faceplusplus.api.entity.Face;
 import com.xiaoying.faceplusplus.api.entity.Faceset;
 import com.xiaoying.faceplusplus.api.entity.Group;
 import com.xiaoying.faceplusplus.api.entity.Person;
-import com.xiaoying.faceplusplus.api.entity.PointF;
 import com.xiaoying.faceplusplus.api.entity.request.info.InfoGetFaceReq;
 import com.xiaoying.faceplusplus.api.entity.request.info.InfoGetImageReq;
+import com.xiaoying.faceplusplus.api.entity.response.info.InfoGetAppResp;
 import com.xiaoying.faceplusplus.api.entity.response.info.InfoGetFaceResp;
 import com.xiaoying.faceplusplus.api.entity.response.info.InfoGetFaceResp.FaceInfo;
-import com.xiaoying.faceplusplus.api.entity.response.info.InfoGetAppResp;
 import com.xiaoying.faceplusplus.api.entity.response.info.InfoGetFacesetListResp;
 import com.xiaoying.faceplusplus.api.entity.response.info.InfoGetGroupListResp;
 import com.xiaoying.faceplusplus.api.entity.response.info.InfoGetImageResp;
@@ -298,7 +297,7 @@ public class InfoService extends BaseService {
 			faceInfo.setUrl(faceInfoObj.getString("url"));
 			faceInfo.setTag(faceInfoObj.getString("tag"));
 			faceInfo.setAttribute(getAttribute(faceInfoObj.getJSONObject("attribute")));
-			faceInfo.setPosition(getPosition(faceInfoObj.getJSONObject("position")));
+			faceInfo.setPosition(FaceService.getPosition(faceInfoObj.getJSONObject("position")));
 			faceInfo.setPerson(getPersons(faceInfoObj.getJSONArray("person")));
 			faceInfo.setFaceset(getFacesets(faceInfoObj.getJSONArray("faceset")));
 			faceInfos.add(faceInfo);
@@ -321,7 +320,7 @@ public class InfoService extends BaseService {
 			face = new Face();
 			face.setFace_id(faceObj.getString("face_id"));
 			face.setTag(faceObj.getString("tag"));
-			face.setPosition(getPosition(faceObj.getJSONObject("position")));
+			face.setPosition(FaceService.getPosition(faceObj.getJSONObject("position")));
 			faces.add(face);
 		}
 		return faces;
@@ -413,32 +412,5 @@ public class InfoService extends BaseService {
 		race.setConfidence(Float.valueOf(raceObj.getString("confidence")));
 		attribute.setRace(race);
 		return attribute;
-	}
-	
-	/**
-	 * 解析JSONArray中的Face.Position
-	 * @param positionObj
-	 * @return
-	 */
-	private Face.Position getPosition(JSONObject positionObj) {
-		Face.Position position = new Face.Position();
-		JSONObject centerObj = positionObj.getJSONObject("center");
-		PointF center = new PointF(Float.valueOf(centerObj.getString("x")), Float.valueOf(centerObj.getString("y")));
-		position.setCenter(center);
-		JSONObject eyeLeftObj = positionObj.getJSONObject("eye_left");
-		PointF eyeLeft = new PointF(Float.valueOf(eyeLeftObj.getString("x")), Float.valueOf(eyeLeftObj.getString("y")));
-		position.setEye_left(eyeLeft);
-		JSONObject eyeRightObj = positionObj.getJSONObject("eye_right");
-		PointF eyeRight = new PointF(Float.valueOf(eyeRightObj.getString("x")), Float.valueOf(eyeRightObj.getString("y")));
-		position.setEye_right(eyeRight);
-		JSONObject mouthLeftObj = positionObj.getJSONObject("mouth_left");
-		PointF mouthLeft = new PointF(Float.valueOf(mouthLeftObj.getString("x")), Float.valueOf(mouthLeftObj.getString("y")));
-		position.setMouth_left(mouthLeft);
-		JSONObject mouthRightObj = positionObj.getJSONObject("mouth_right");
-		PointF mouthRight = new PointF(Float.valueOf(mouthRightObj.getString("x")), Float.valueOf(mouthRightObj.getString("y")));
-		position.setMouth_right(mouthRight);
-		position.setWidth(Float.valueOf(positionObj.getString("width")));
-		position.setHeight(Float.valueOf(positionObj.getString("height")));
-		return position;
 	}
 }

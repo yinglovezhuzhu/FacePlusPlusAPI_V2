@@ -81,4 +81,20 @@ public class Config {
 	
 	public static final String PATH_INFO_GET_APP = "/info/get_app";
 	
+	//train
+	public static final String PATH_TRAIN_VERIFY = "/train/verify";
+
+	public static final String PATH_TRAIN_SEARCH = "/train/search";
+	
+	public static final String PATH_TRAIN_IDENTIFY = "/train/identify";
+	
+	//recognition
+	public static final String PATH_RECOGNITION_COMPARE = "/recognition/compare";
+	
+	public static final String PATH_RECOGNITION_VERIFY = "/recognition/verify";
+	
+	public static final String PATH_RECOGNITION_SEARCH = "/recognition/search";
+	
+	public static final String PATH_RECOGNITION_IDENTIFY = "/recognition/identify";
+	
 }

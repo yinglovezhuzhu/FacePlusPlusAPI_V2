@@ -124,7 +124,12 @@ public class FaceService extends BaseService {
 		return attribute;
 	}
 	
-	private Face.Position getPosition(JSONObject positionObj) {
+	/**
+	 * 从JSONObject解析Face的position信息
+	 * @param positionObj
+	 * @return
+	 */
+	public static Face.Position getPosition(JSONObject positionObj) {
 		Face.Position position = new Face.Position();
 		JSONObject centerObj = positionObj.getJSONObject("center");
 		PointF center = new PointF(Float.valueOf(centerObj.getString("x")), Float.valueOf(centerObj.getString("y")));
@@ -135,6 +140,9 @@ public class FaceService extends BaseService {
 		JSONObject eyeRightObj = positionObj.getJSONObject("eye_right");
 		PointF eyeRight = new PointF(Float.valueOf(eyeRightObj.getString("x")), Float.valueOf(eyeRightObj.getString("y")));
 		position.setEye_right(eyeRight);
+		JSONObject nosehtObj = positionObj.getJSONObject("nose");
+		PointF nose = new PointF(Float.valueOf(nosehtObj.getString("x")), Float.valueOf(nosehtObj.getString("y")));
+		position.setNose(nose);
 		JSONObject mouthLeftObj = positionObj.getJSONObject("mouth_left");
 		PointF mouthLeft = new PointF(Float.valueOf(mouthLeftObj.getString("x")), Float.valueOf(mouthLeftObj.getString("y")));
 		position.setMouth_left(mouthLeft);
