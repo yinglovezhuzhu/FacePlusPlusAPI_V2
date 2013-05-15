@@ -22,7 +22,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
-import com.xiaoying.faceplusplus.api.config.Config;
+import com.xiaoying.faceplusplus.api.config.RespConfig;
+import com.xiaoying.faceplusplus.api.config.UrlConfig;
 import com.xiaoying.faceplusplus.api.entity.request.grouping.GroupingFaceReq;
 import com.xiaoying.faceplusplus.api.entity.response.grouping.GroupingFaceResp;
 import com.xiaoying.faceplusplus.api.utils.HttpUtil;
@@ -62,16 +63,13 @@ public class GroupingService extends BaseService {
 		params.put("faceset_id", body.getFaceset_id());
 		params.put("faceset_name", body.getFaceset_name());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_GROUPING, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_GROUPING, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		GroupingFaceResp result = new GroupingFaceResp();
-		if(json.containsKey("session_id")) {
-			result.setSession_id(json.getString("session_id"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSession_id(json.optString("session_id"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 

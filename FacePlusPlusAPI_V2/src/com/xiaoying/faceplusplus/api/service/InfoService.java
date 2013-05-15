@@ -26,7 +26,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
-import com.xiaoying.faceplusplus.api.config.Config;
+import com.xiaoying.faceplusplus.api.config.RespConfig;
+import com.xiaoying.faceplusplus.api.config.UrlConfig;
 import com.xiaoying.faceplusplus.api.entity.Face;
 import com.xiaoying.faceplusplus.api.entity.Faceset;
 import com.xiaoying.faceplusplus.api.entity.Group;
@@ -76,18 +77,15 @@ public class InfoService extends BaseService {
 		params.put("api_secret", client.getAppSecret());
 		params.put("img_id", body.getImg_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_INFO_GET_IMAGE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_INFO_GET_IMAGE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		InfoGetImageResp result = new InfoGetImageResp();
-		if(json.containsKey("img_id")) {
-			result.setImg_id(json.getString("img_id"));
-			result.setUrl(json.getString("url"));
-			result.setFace(getFaces(json.getJSONArray("face")));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setImg_id(json.optString("img_id"));
+		result.setUrl(json.optString("url"));
+		result.setFace(getFaces(json.optJSONArray("face")));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -107,16 +105,13 @@ public class InfoService extends BaseService {
 		params.put("api_secret", client.getAppSecret());
 		params.put("face_id", body.getFace_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_INFO_GET_FACE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_INFO_GET_FACE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		InfoGetFaceResp result = new InfoGetFaceResp();
-		if(json.containsKey("face_info")) {
-			result.setFace_info(getFaceInfo(json.getJSONArray("face_info")));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setFace_info(getFaceInfo(json.optJSONArray("face_info")));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -131,16 +126,13 @@ public class InfoService extends BaseService {
 		params.put("api_key", client.getAppKey());
 		params.put("api_secret", client.getAppSecret());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_INFO_GET_PERSON_LIST, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_INFO_GET_PERSON_LIST, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		InfoGetPersonListResp result = new InfoGetPersonListResp();
-		if(json.containsKey("person")) {
-			result.setPerson(getPersons(json.getJSONArray("person")));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setPerson(getPersons(json.optJSONArray("person")));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -155,16 +147,13 @@ public class InfoService extends BaseService {
 		params.put("api_key", client.getAppKey());
 		params.put("api_secret", client.getAppSecret());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_INFO_GET_FACESET_LIST, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_INFO_GET_FACESET_LIST, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		InfoGetFacesetListResp result = new InfoGetFacesetListResp();
-		if(json.containsKey("faceset")) {
-			result.setFaceset(getFacesets(json.getJSONArray("faceset")));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setFaceset(getFacesets(json.optJSONArray("faceset")));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -179,16 +168,13 @@ public class InfoService extends BaseService {
 		params.put("api_key", client.getAppKey());
 		params.put("api_secret", client.getAppSecret());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_INFO_GET_GROUP_LIST, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_INFO_GET_GROUP_LIST, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		InfoGetGroupListResp result = new InfoGetGroupListResp();
-		if(json.containsKey("group")) {
-			result.setGroup(getGroups(json.getJSONArray("group")));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setGroup(getGroups(json.optJSONArray("group")));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -210,20 +196,17 @@ public class InfoService extends BaseService {
 		params.put("api_secret", client.getAppSecret());
 		params.put("session_id", sessionId);
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_INFO_GET_SESSION, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_INFO_GET_SESSION, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		InfoGetSessionResp result = new InfoGetSessionResp();
-		if(json.containsKey("session_id")) {
-			result.setSession_id(json.getString("session_id"));
-			result.setCreate_time(json.getInt("create_time"));
-			result.setFinish_time(json.getInt("finish_time"));
-			result.setStatus(json.getString("status"));
-			result.setResult(json.getJSONObject("result"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSession_id(json.optString("session_id"));
+		result.setCreate_time(json.optInt("create_time"));
+		result.setFinish_time(json.optInt("finish_time"));
+		result.setStatus(json.optString("status"));
+		result.setResult(json.optJSONObject("result"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -238,18 +221,15 @@ public class InfoService extends BaseService {
 		params.put("api_key", client.getAppKey());
 		params.put("api_secret", client.getAppSecret());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_INFO_GET_QUOTA, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_INFO_GET_QUOTA, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		InfoGetQuotaResp result = new InfoGetQuotaResp();
-		if(json.containsKey("total")) {
-			result.setTotal(json.getInt("total"));
-			result.setUsed(json.getInt("used"));
-			result.setExceed(json.getInt("exceed"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setTotal(json.optInt("total"));
+		result.setUsed(json.optInt("used"));
+		result.setExceed(json.optInt("exceed"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -264,17 +244,14 @@ public class InfoService extends BaseService {
 		params.put("api_key", client.getAppKey());
 		params.put("api_secret", client.getAppSecret());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_INFO_GET_APP, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_INFO_GET_APP, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		InfoGetAppResp result = new InfoGetAppResp();
-		if(json.containsKey("name")) {
-			result.setName(json.getString("name"));
-			result.setDescription(json.getString("description"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setName(json.optString("name"));
+		result.setDescription(json.optString("description"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -292,14 +269,14 @@ public class InfoService extends BaseService {
 		for(Iterator<JSONObject> i = faceInfoArray.iterator(); i.hasNext(); ) {
 			faceInfoObj = JSONObject.fromObject(i.next());
 			faceInfo = new FaceInfo();
-			faceInfo.setFace_id(faceInfoObj.getString("face_id"));
-			faceInfo.setImg_id(faceInfoObj.getString("img_id"));
-			faceInfo.setUrl(faceInfoObj.getString("url"));
-			faceInfo.setTag(faceInfoObj.getString("tag"));
-			faceInfo.setAttribute(getAttribute(faceInfoObj.getJSONObject("attribute")));
-			faceInfo.setPosition(FaceService.getPosition(faceInfoObj.getJSONObject("position")));
-			faceInfo.setPerson(getPersons(faceInfoObj.getJSONArray("person")));
-			faceInfo.setFaceset(getFacesets(faceInfoObj.getJSONArray("faceset")));
+			faceInfo.setFace_id(faceInfoObj.optString("face_id"));
+			faceInfo.setImg_id(faceInfoObj.optString("img_id"));
+			faceInfo.setUrl(faceInfoObj.optString("url"));
+			faceInfo.setTag(faceInfoObj.optString("tag"));
+			faceInfo.setAttribute(getAttribute(faceInfoObj.optJSONObject("attribute")));
+			faceInfo.setPosition(FaceService.getPosition(faceInfoObj.optJSONObject("position")));
+			faceInfo.setPerson(getPersons(faceInfoObj.optJSONArray("person")));
+			faceInfo.setFaceset(getFacesets(faceInfoObj.optJSONArray("faceset")));
 			faceInfos.add(faceInfo);
 		}
 		return faceInfos;
@@ -318,9 +295,9 @@ public class InfoService extends BaseService {
 		for(Iterator<JSONObject> i = faceArray.iterator(); i.hasNext(); ) {
 			faceObj = JSONObject.fromObject(i.next());
 			face = new Face();
-			face.setFace_id(faceObj.getString("face_id"));
-			face.setTag(faceObj.getString("tag"));
-			face.setPosition(FaceService.getPosition(faceObj.getJSONObject("position")));
+			face.setFace_id(faceObj.optString("face_id"));
+			face.setTag(faceObj.optString("tag"));
+			face.setPosition(FaceService.getPosition(faceObj.optJSONObject("position")));
 			faces.add(face);
 		}
 		return faces;
@@ -339,9 +316,9 @@ public class InfoService extends BaseService {
 		for(Iterator<JSONObject> i = facesetArray.iterator(); i.hasNext(); ) {
 			facesetObj = JSONObject.fromObject(i.next());
 			faceset = new Faceset();
-			faceset.setFaceset_id(facesetObj.getString("faceset_id"));
-			faceset.setFaceset_name(facesetObj.getString("faceset_name"));
-			faceset.setTag(facesetObj.getString("tag"));
+			faceset.setFaceset_id(facesetObj.optString("faceset_id"));
+			faceset.setFaceset_name(facesetObj.optString("faceset_name"));
+			faceset.setTag(facesetObj.optString("tag"));
 			facesets.add(faceset);
 		}
 		return facesets;
@@ -360,9 +337,9 @@ public class InfoService extends BaseService {
 		for(Iterator<JSONObject> i = personArray.iterator(); i.hasNext(); ) {
 			personObj = JSONObject.fromObject(i.next());
 			person = new Person();
-			person.setPerson_id(personObj.getString("person_id"));
-			person.setPerson_name(personObj.getString("person_name"));
-			person.setTag(personObj.getString("tag"));
+			person.setPerson_id(personObj.optString("person_id"));
+			person.setPerson_name(personObj.optString("person_name"));
+			person.setTag(personObj.optString("tag"));
 			persons.add(person);
 		}
 		return persons;
@@ -381,9 +358,9 @@ public class InfoService extends BaseService {
 		for(Iterator<JSONObject> i = groupArray.iterator(); i.hasNext(); ) {
 			groupObj = JSONObject.fromObject(i.next());
 			group = new Group();
-			group.setGroup_id(groupObj.getString("group_id"));
-			group.setGroup_name(groupObj.getString("group_name"));
-			group.setTag(groupObj.getString("tag"));
+			group.setGroup_id(groupObj.optString("group_id"));
+			group.setGroup_name(groupObj.optString("group_name"));
+			group.setTag(groupObj.optString("tag"));
 			groups.add(group);
 		}
 		return groups;
@@ -396,20 +373,20 @@ public class InfoService extends BaseService {
 	 */
 	private Face.Attribute getAttribute(JSONObject attributeObj) {
 		Face.Attribute attribute = new Face.Attribute();
-		JSONObject ageObj = attributeObj.getJSONObject("age");
+		JSONObject ageObj = attributeObj.optJSONObject("age");
 		Face.Age age = new Face.Age();
-		age.setValue(ageObj.getInt("value"));
-		age.setRange(ageObj.getInt("range"));
+		age.setValue(ageObj.optInt("value"));
+		age.setRange(ageObj.optInt("range"));
 		attribute.setAge(age);
-		JSONObject genderObj = attributeObj.getJSONObject("gender");
+		JSONObject genderObj = attributeObj.optJSONObject("gender");
 		Face.Gender gender = new Face.Gender();
-		gender.setValue(genderObj.getString("value"));
-		gender.setConfidence(Float.valueOf(genderObj.getString("confidence")));
+		gender.setValue(genderObj.optString("value"));
+		gender.setConfidence(Float.valueOf(genderObj.optString("confidence")));
 		attribute.setGender(gender);
-		JSONObject raceObj = attributeObj.getJSONObject("race");
+		JSONObject raceObj = attributeObj.optJSONObject("race");
 		Face.Race race = new Face.Race();
-		race.setValue(raceObj.getString("value"));
-		race.setConfidence(Float.valueOf(raceObj.getString("confidence")));
+		race.setValue(raceObj.optString("value"));
+		race.setConfidence(Float.valueOf(raceObj.optString("confidence")));
 		attribute.setRace(race);
 		return attribute;
 	}

@@ -51,10 +51,13 @@ public class PersonAddFaceResp extends BaseResponse {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "PersonDeleteFaceResp [added=" + added + ", success=" + success
-				+ "]";
+		return "PersonAddFaceResp [added=" + added + ", success=" + success
+				+ ", error=" + error + ", error_code=" + error_code + "]";
 	}
 	
 }

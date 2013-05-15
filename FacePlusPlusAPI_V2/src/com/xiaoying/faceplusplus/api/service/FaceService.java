@@ -26,7 +26,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
-import com.xiaoying.faceplusplus.api.config.Config;
+import com.xiaoying.faceplusplus.api.config.RespConfig;
+import com.xiaoying.faceplusplus.api.config.UrlConfig;
 import com.xiaoying.faceplusplus.api.entity.Face;
 import com.xiaoying.faceplusplus.api.entity.PointF;
 import com.xiaoying.faceplusplus.api.entity.request.face.DetectFaceReq;
@@ -36,7 +37,7 @@ import com.xiaoying.faceplusplus.api.utils.Log;
 import com.xiaoying.faceplusplus.api.utils.StringUtil;
 
 /**
- * 功能：
+ * 功能：人脸检测
  * @author xiaoying
  */
 public class FaceService extends BaseService {
@@ -73,53 +74,50 @@ public class FaceService extends BaseService {
 	
 	@SuppressWarnings("unchecked")
 	private DetectResp getResponse(Map<String, Object> params) throws ClientProtocolException, IOException {
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_DETECT, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_DETECT, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		DetectResp result = new DetectResp();
-		if(json.containsKey("session_id")) {
-			result.setSession_id(json.getString("session_id"));
-			result.setImage_id(json.getString("img_id"));
-			result.setUrl(json.getString("url"));
-			result.setImg_width(json.getInt("img_width"));
-			result.setImg_height(json.getInt("img_height"));
-			JSONArray faceArray = json.getJSONArray("face");
-			JSONObject faceObj = null;
-			List<Face> faces = new ArrayList<Face>();
-			Face face = null;
-			for(Iterator<JSONObject> i = faceArray.iterator(); i.hasNext(); ) {
-				faceObj = JSONObject.fromObject(i.next());
-				face = new Face();
-				face.setFace_id(faceObj.getString("face_id"));
-				face.setTag(faceObj.getString("tag"));
-				face.setAttribute(getAttribute(faceObj.getJSONObject("attribute")));
-				face.setPosition(getPosition(faceObj.getJSONObject("position")));
-				faces.add(face);
-			}
-			result.setFace(faces);
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
+		result.setSession_id(json.optString("session_id"));
+		result.setImage_id(json.optString("img_id"));
+		result.setUrl(json.optString("url"));
+		result.setImg_width(json.optInt("img_width"));
+		result.setImg_height(json.optInt("img_height"));
+		JSONArray faceArray = json.optJSONArray("face");
+		JSONObject faceObj = null;
+		List<Face> faces = new ArrayList<Face>();
+		Face face = null;
+		for(Iterator<JSONObject> i = faceArray.iterator(); i.hasNext(); ) {
+			faceObj = JSONObject.fromObject(i.next());
+			face = new Face();
+			face.setFace_id(faceObj.optString("face_id"));
+			face.setTag(faceObj.optString("tag"));
+			face.setAttribute(getAttribute(faceObj.optJSONObject("attribute")));
+			face.setPosition(getPosition(faceObj.optJSONObject("position")));
+			faces.add(face);
 		}
+		result.setFace(faces);
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
 	private Face.Attribute getAttribute(JSONObject attributeObj) {
 		Face.Attribute attribute = new Face.Attribute();
-		JSONObject ageObj = attributeObj.getJSONObject("age");
+		JSONObject ageObj = attributeObj.optJSONObject("age");
 		Face.Age age = new Face.Age();
-		age.setValue(ageObj.getInt("value"));
-		age.setRange(ageObj.getInt("range"));
+		age.setValue(ageObj.optInt("value"));
+		age.setRange(ageObj.optInt("range"));
 		attribute.setAge(age);
-		JSONObject genderObj = attributeObj.getJSONObject("gender");
+		JSONObject genderObj = attributeObj.optJSONObject("gender");
 		Face.Gender gender = new Face.Gender();
-		gender.setValue(genderObj.getString("value"));
-		gender.setConfidence(Float.valueOf(genderObj.getString("confidence")));
+		gender.setValue(genderObj.optString("value"));
+		gender.setConfidence((float)genderObj.optDouble("confidence"));
 		attribute.setGender(gender);
-		JSONObject raceObj = attributeObj.getJSONObject("race");
+		JSONObject raceObj = attributeObj.optJSONObject("race");
 		Face.Race race = new Face.Race();
-		race.setValue(raceObj.getString("value"));
-		race.setConfidence(Float.valueOf(raceObj.getString("confidence")));
+		race.setValue(raceObj.optString("value"));
+		race.setConfidence((float)raceObj.optDouble("confidence"));
 		attribute.setRace(race);
 		return attribute;
 	}
@@ -131,26 +129,26 @@ public class FaceService extends BaseService {
 	 */
 	public static Face.Position getPosition(JSONObject positionObj) {
 		Face.Position position = new Face.Position();
-		JSONObject centerObj = positionObj.getJSONObject("center");
-		PointF center = new PointF(Float.valueOf(centerObj.getString("x")), Float.valueOf(centerObj.getString("y")));
+		JSONObject centerObj = positionObj.optJSONObject("center");
+		PointF center = new PointF((float)centerObj.optDouble("x"), (float)centerObj.optDouble("y"));
 		position.setCenter(center);
-		JSONObject eyeLeftObj = positionObj.getJSONObject("eye_left");
-		PointF eyeLeft = new PointF(Float.valueOf(eyeLeftObj.getString("x")), Float.valueOf(eyeLeftObj.getString("y")));
+		JSONObject eyeLeftObj = positionObj.optJSONObject("eye_left");
+		PointF eyeLeft = new PointF((float)eyeLeftObj.optDouble("x"), (float)eyeLeftObj.optDouble("y"));
 		position.setEye_left(eyeLeft);
-		JSONObject eyeRightObj = positionObj.getJSONObject("eye_right");
-		PointF eyeRight = new PointF(Float.valueOf(eyeRightObj.getString("x")), Float.valueOf(eyeRightObj.getString("y")));
+		JSONObject eyeRightObj = positionObj.optJSONObject("eye_right");
+		PointF eyeRight = new PointF((float)eyeRightObj.optDouble("x"), (float)eyeRightObj.optDouble("y"));
 		position.setEye_right(eyeRight);
-		JSONObject nosehtObj = positionObj.getJSONObject("nose");
-		PointF nose = new PointF(Float.valueOf(nosehtObj.getString("x")), Float.valueOf(nosehtObj.getString("y")));
+		JSONObject nosehtObj = positionObj.optJSONObject("nose");
+		PointF nose = new PointF((float)nosehtObj.optDouble("x"), (float)nosehtObj.optDouble("y"));
 		position.setNose(nose);
-		JSONObject mouthLeftObj = positionObj.getJSONObject("mouth_left");
-		PointF mouthLeft = new PointF(Float.valueOf(mouthLeftObj.getString("x")), Float.valueOf(mouthLeftObj.getString("y")));
+		JSONObject mouthLeftObj = positionObj.optJSONObject("mouth_left");
+		PointF mouthLeft = new PointF((float)mouthLeftObj.optDouble("x"), (float)mouthLeftObj.optDouble("y"));
 		position.setMouth_left(mouthLeft);
-		JSONObject mouthRightObj = positionObj.getJSONObject("mouth_right");
-		PointF mouthRight = new PointF(Float.valueOf(mouthRightObj.getString("x")), Float.valueOf(mouthRightObj.getString("y")));
+		JSONObject mouthRightObj = positionObj.optJSONObject("mouth_right");
+		PointF mouthRight = new PointF((float)mouthRightObj.optDouble("x"), (float)mouthRightObj.optDouble("y"));
 		position.setMouth_right(mouthRight);
-		position.setWidth(Float.valueOf(positionObj.getString("width")));
-		position.setHeight(Float.valueOf(positionObj.getString("height")));
+		position.setWidth((float)positionObj.optDouble("width"));
+		position.setHeight((float)positionObj.optDouble("height"));
 		return position;
 	}
 }

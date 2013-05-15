@@ -51,10 +51,13 @@ public class PersonDeleteResp extends BaseResponse {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "PersonDeleteResp [deleted=" + deleted + ", success=" + success
-				+ "]";
+				+ ", error=" + error + ", error_code=" + error_code + "]";
 	}
 	
 	

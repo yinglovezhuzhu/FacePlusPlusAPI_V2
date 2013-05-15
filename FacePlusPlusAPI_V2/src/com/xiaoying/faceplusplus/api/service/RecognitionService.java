@@ -26,7 +26,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
-import com.xiaoying.faceplusplus.api.config.Config;
+import com.xiaoying.faceplusplus.api.config.RespConfig;
+import com.xiaoying.faceplusplus.api.config.UrlConfig;
 import com.xiaoying.faceplusplus.api.entity.request.recognition.CompareReq;
 import com.xiaoying.faceplusplus.api.entity.request.recognition.IdentityReq;
 import com.xiaoying.faceplusplus.api.entity.request.recognition.SearchReq;
@@ -70,23 +71,23 @@ public class RecognitionService extends BaseService {
 		params.put("face_id1", body.getFace_id1());
 		params.put("face_id2", body.getFace_id2());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_RECOGNITION_COMPARE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_RECOGNITION_COMPARE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		CompareResp result = new CompareResp();
 		if(json.containsKey("session_id")) {
-			result.setSession_id(json.getString("session_id"));
-			result.setSimilarity((float)json.getDouble("similarity"));
-			JSONObject jsObj = json.getJSONObject("component_similarity");
+			result.setSession_id(json.optString("session_id"));
+			result.setSimilarity((float)json.optDouble("similarity"));
+			JSONObject jsObj = json.optJSONObject("component_similarity");
 			CompareResp.ComponentSimilarity obj = new CompareResp.ComponentSimilarity();
-			obj.setEye((float)jsObj.getDouble("eye"));
-			obj.setMouth((float) jsObj.getDouble("mouth"));
-			obj.setNose((float) jsObj.getDouble("nose"));
-			obj.setEyebrow((float) jsObj.getDouble("eyebrow"));
+			obj.setEye((float)jsObj.optDouble("eye"));
+			obj.setMouth((float) jsObj.optDouble("mouth"));
+			obj.setNose((float) jsObj.optDouble("nose"));
+			obj.setEyebrow((float) jsObj.optDouble("eyebrow"));
 			result.setComponent_similarity(obj);
 		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
+			result.setError(json.optString("error"));
+			result.setError_code(json.optInt("error_code"));
 		}
 		return result;
 	}
@@ -116,18 +117,15 @@ public class RecognitionService extends BaseService {
 		params.put("person_id", body.getPerson_id());
 		params.put("person_name", body.getPerson_name());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_RECOGNITION_VERIFY, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_RECOGNITION_VERIFY, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		VerifyResp result = new VerifyResp();
-		if(json.containsKey("session_id")) {
-			result.setSession_id(json.getString("session_id"));
-			result.setIs_same_person(json.getBoolean("is_same_person"));
-			result.setConfidence((float)json.getDouble("confidence"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSession_id(json.optString("session_id"));
+		result.setIs_same_person(json.optBoolean("is_same_person"));
+		result.setConfidence((float)json.optDouble("confidence"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -156,17 +154,14 @@ public class RecognitionService extends BaseService {
 		params.put("faceset_id", body.getFaceset_id());
 		params.put("faceset_name", body.getFaceset_name());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_RECOGNITION_SEARCH, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_RECOGNITION_SEARCH, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		SearchResp result = new SearchResp();
-		if(json.containsKey("session_id")) {
-			result.setSession_id(json.getString("session_id"));
-			result.setCandidates(getSearchCanditate(json.getJSONArray("candidate")));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSession_id(json.optString("session_id"));
+		result.setCandidates(getSearchCanditate(json.optJSONArray("candidate")));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -184,17 +179,14 @@ public class RecognitionService extends BaseService {
 		params.put("mode", body.getMode());
 		params.put("key_face_id", body.getKey_face_id());
 		params.put("async", body.getAsync());
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_RECOGNITION_IDENTIFY, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_RECOGNITION_IDENTIFY, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		IdentityResp result = new IdentityResp();
-		if(json.containsKey("session_id")) {
-			result.setSession_id(json.getString("session_id"));
-			result.setFace(getIdentityFace(json.getJSONArray("face")));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSession_id(json.optString("session_id"));
+		result.setFace(getIdentityFace(json.optJSONArray("face")));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -211,9 +203,9 @@ public class RecognitionService extends BaseService {
 		for(Iterator<JSONObject> i = canditateArray.iterator(); i.hasNext(); ) {
 			candidateObj = JSONObject.fromObject(i.next());
 			candidate = new SearchResp.Candidate();
-			candidate.setFace_id(candidateObj.getString("face_id"));
-			candidate.setTag(candidateObj.getString("tag"));
-			candidate.setSimilarity((float) candidateObj.getDouble("similarity"));
+			candidate.setFace_id(candidateObj.optString("face_id"));
+			candidate.setTag(candidateObj.optString("tag"));
+			candidate.setSimilarity((float) candidateObj.optDouble("similarity"));
 			candidates.add(candidate);
 		}
 		return candidates;
@@ -232,9 +224,9 @@ public class RecognitionService extends BaseService {
 		for(Iterator<JSONObject> i = faceArray.iterator(); i.hasNext(); ) {
 			faceObj = JSONObject.fromObject(i.next());
 			face = new IdentityResp.IdentityFace();
-			face.setFace_id(faceObj.getString("face_id"));
-			face.setCandidates(getIdentityCanditate(faceObj.getJSONArray("candidate")));
-			face.setPosition(FaceService.getPosition(faceObj.getJSONObject("position")));
+			face.setFace_id(faceObj.optString("face_id"));
+			face.setCandidates(getIdentityCanditate(faceObj.optJSONArray("candidate")));
+			face.setPosition(FaceService.getPosition(faceObj.optJSONObject("position")));
 			faces.add(face);
 		}
 		return faces;
@@ -253,10 +245,10 @@ public class RecognitionService extends BaseService {
 		for(Iterator<JSONObject> i = canditateArray.iterator(); i.hasNext(); ) {
 			candidateObj = JSONObject.fromObject(i.next());
 			candidate = new IdentityResp.Candidate();
-			candidate.setPerson_id(candidateObj.getString("person_id"));
-			candidate.setPerson_name(candidateObj.getString("person_name"));
-			candidate.setTag(candidateObj.getString("tag"));
-			candidate.setConfidence((float) candidateObj.getDouble("confidence"));
+			candidate.setPerson_id(candidateObj.optString("person_id"));
+			candidate.setPerson_name(candidateObj.optString("person_name"));
+			candidate.setTag(candidateObj.optString("tag"));
+			candidate.setConfidence((float) candidateObj.optDouble("confidence"));
 			candidates.add(candidate);
 		}
 		return candidates;

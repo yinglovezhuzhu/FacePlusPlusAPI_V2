@@ -26,7 +26,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
-import com.xiaoying.faceplusplus.api.config.Config;
+import com.xiaoying.faceplusplus.api.config.RespConfig;
+import com.xiaoying.faceplusplus.api.config.UrlConfig;
 import com.xiaoying.faceplusplus.api.entity.Face;
 import com.xiaoying.faceplusplus.api.entity.request.faceset.FacesetAddFaceReq;
 import com.xiaoying.faceplusplus.api.entity.request.faceset.FacesetCreateReq;
@@ -72,19 +73,16 @@ public class FacesetService extends BaseService {
 		params.put("face_id", body.getFace_id());
 		params.put("tag", body.getTag());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_FACESET_CREATE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_FACESET_CREATE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		FacesetCreateResp result = new FacesetCreateResp();
-		if(json.containsKey("faceset_id")) {
-			result.setFaceset_name(json.getString("faceset_name"));
-			result.setFaceset_id(json.getString("faceset_id"));
-			result.setTag(json.getString("tag"));
-			result.setAdded_face(json.getInt("added_face"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setFaceset_name(json.optString("faceset_name"));
+		result.setFaceset_id(json.optString("faceset_id"));
+		result.setTag(json.optString("tag"));
+		result.setAdded_face(json.optInt("added_face"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -105,17 +103,14 @@ public class FacesetService extends BaseService {
 		params.put("faceset_name", body.getFaceset_name());
 		params.put("faceset_id", body.getFaceset_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_FACESET_DELETE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_FACESET_DELETE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		FacesetDeleteResp result = new FacesetDeleteResp();
-		if(json.containsKey("deleted")) {
-			result.setDeleted(json.getInt("deleted"));
-			result.setSuccess(json.getBoolean("success"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setDeleted(json.optInt("deleted"));
+		result.setSuccess(json.optBoolean("success"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -140,17 +135,14 @@ public class FacesetService extends BaseService {
 		params.put("faceset_id", body.getFaceset_id());
 		params.put("face_id", body.getFace_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_FACESET_ADD_FACE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_FACESET_ADD_FACE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		FacesetAddFaceResp result = new FacesetAddFaceResp();
-		if(json.containsKey("added")) {
-			result.setAdded(json.getInt("added"));
-			result.setSuccess(json.getBoolean("success"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setAdded(json.optInt("added"));
+		result.setSuccess(json.optBoolean("success"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -175,17 +167,14 @@ public class FacesetService extends BaseService {
 		params.put("faceset_id", body.getFaceset_id());
 		params.put("face_id", body.getFace_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_FACESET_REMOVE_FACE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_FACESET_REMOVE_FACE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		FacesetRemoveFaceResp result = new FacesetRemoveFaceResp();
-		if(json.containsKey("removed")) {
-			result.setRemoved(json.getInt("removed"));
-			result.setSuccess(json.getBoolean("success"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setRemoved(json.optInt("removed"));
+		result.setSuccess(json.optBoolean("success"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -208,18 +197,15 @@ public class FacesetService extends BaseService {
 		params.put("name", body.getName());
 		params.put("tag", body.getTag());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_FACESET_SET_INFO, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_FACESET_SET_INFO, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		FacesetSetInfoResp result = new FacesetSetInfoResp();
-		if(json.containsKey("faceset_id")) {
-			result.setFaceset_name(json.getString("faceset_name"));
-			result.setFaceset_id(json.getString("faceset_id"));
-			result.setTag(json.getString("tag"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setFaceset_name(json.optString("faceset_name"));
+		result.setFaceset_id(json.optString("faceset_id"));
+		result.setTag(json.optString("tag"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -240,19 +226,16 @@ public class FacesetService extends BaseService {
 		params.put("faceset_name", body.getFaceset_name());
 		params.put("faceset_id", body.getFaceset_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_FACESET_GET_INFO, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_FACESET_GET_INFO, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		FacesetGetInfoResp result = new FacesetGetInfoResp();
-		if(json.containsKey("faceset_name")) {
-			result.setFaceset_name(json.getString("faceset_name"));
-			result.setFaceset_id(json.getString("faceset_id"));
-			result.setTag(json.getString("tag"));
-			result.setFace(getFaceInfo(json.getJSONArray("face")));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setFaceset_name(json.optString("faceset_name"));
+		result.setFaceset_id(json.optString("faceset_id"));
+		result.setTag(json.optString("tag"));
+		result.setFace(getFaceInfo(json.optJSONArray("face")));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -264,8 +247,8 @@ public class FacesetService extends BaseService {
 		for(Iterator<JSONObject> i = faceArray.iterator(); i.hasNext(); ) {
 			faceObj = JSONObject.fromObject(i.next());
 			face = new Face();
-			face.setFace_id(faceObj.getString("face_id"));
-			face.setTag(faceObj.getString("tag"));
+			face.setFace_id(faceObj.optString("face_id"));
+			face.setTag(faceObj.optString("tag"));
 			faces.add(face);
 		}
 		return faces;

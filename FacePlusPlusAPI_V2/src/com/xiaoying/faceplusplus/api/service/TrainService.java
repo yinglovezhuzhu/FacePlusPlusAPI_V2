@@ -22,7 +22,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
-import com.xiaoying.faceplusplus.api.config.Config;
+import com.xiaoying.faceplusplus.api.config.RespConfig;
+import com.xiaoying.faceplusplus.api.config.UrlConfig;
 import com.xiaoying.faceplusplus.api.entity.request.train.TrainIdentityReq;
 import com.xiaoying.faceplusplus.api.entity.request.train.TrainSearchReq;
 import com.xiaoying.faceplusplus.api.entity.request.train.TrainVerifyReq;
@@ -69,16 +70,13 @@ public class TrainService extends BaseService {
 		params.put("person_name", body.getPerson_name());
 		params.put("person_id", body.getPerson_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_TRAIN_VERIFY, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_TRAIN_VERIFY, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		TrainVerifyResp result = new TrainVerifyResp();
-		if(json.containsKey("session_id")) {
-			result.setSession_id(json.getString("session_id"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSession_id(json.optString("session_id"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -104,16 +102,13 @@ public class TrainService extends BaseService {
 		params.put("faceset_id", body.getFaceset_id());
 		params.put("faceset_name", body.getFaceset_name());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_TRAIN_SEARCH, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_TRAIN_SEARCH, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		TrainSearchResp result = new TrainSearchResp();
-		if(json.containsKey("session_id")) {
-			result.setSession_id(json.getString("session_id"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSession_id(json.optString("session_id"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -139,16 +134,13 @@ public class TrainService extends BaseService {
 		params.put("group_id", body.getGroup_id());
 		params.put("group_name", body.getGroup_name());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_TRAIN_IDENTIFY, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_TRAIN_IDENTIFY, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		TrainIdentityResp result = new TrainIdentityResp();
-		if(json.containsKey("session_id")) {
-			result.setSession_id(json.getString("session_id"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSession_id(json.optString("session_id"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 

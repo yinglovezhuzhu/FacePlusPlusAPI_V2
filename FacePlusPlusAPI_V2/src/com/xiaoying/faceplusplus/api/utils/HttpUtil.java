@@ -24,7 +24,7 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.xiaoying.faceplusplus.api.config.Config;
+import com.xiaoying.faceplusplus.api.config.UrlConfig;
 
 /**
  * 功能：网络数据传输工具类
@@ -35,7 +35,7 @@ public class HttpUtil {
 	
 	public static HttpResponse doPost(String actionPath, Map<String, Object> params) throws ClientProtocolException, IOException {
 		DefaultHttpClient client = new DefaultHttpClient();
-		HttpPost post = new HttpPost(Config.BASE_URL + actionPath);
+		HttpPost post = new HttpPost(UrlConfig.BASE_URL + actionPath);
 		MultipartEntity mulEntity = new MultipartEntity();
 		Set<String> keys = params.keySet();
 		for (String key : keys) {
@@ -44,7 +44,7 @@ public class HttpUtil {
 				mulEntity.addPart(key, new FileBody((File) obj));
 			} else {
 				if(obj != null && !StringUtil.isEmpty(obj.toString())) {
-					mulEntity.addPart(key, new StringBody(obj.toString(), Charset.forName(Config.CHART_SET)));
+					mulEntity.addPart(key, new StringBody(obj.toString(), Charset.forName(UrlConfig.CHART_SET)));
 				}
 			}
 		}

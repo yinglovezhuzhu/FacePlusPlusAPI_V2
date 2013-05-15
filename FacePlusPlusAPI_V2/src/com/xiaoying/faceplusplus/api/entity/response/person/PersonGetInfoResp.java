@@ -113,10 +113,14 @@ public class PersonGetInfoResp extends BaseResponse {
 		this.group = group;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "PersonGetInfoResp [person_name=" + person_name + ", person_id="
 				+ person_id + ", tag=" + tag + ", face=" + face + ", group="
-				+ group + "]";
+				+ group + ", error=" + error + ", error_code=" + error_code
+				+ "]";
 	}
 }

@@ -25,7 +25,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
-import com.xiaoying.faceplusplus.api.config.Config;
+import com.xiaoying.faceplusplus.api.config.RespConfig;
+import com.xiaoying.faceplusplus.api.config.UrlConfig;
 import com.xiaoying.faceplusplus.api.entity.Person;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupAddPersonReq;
 import com.xiaoying.faceplusplus.api.entity.request.group.GroupCreateReq;
@@ -44,7 +45,7 @@ import com.xiaoying.faceplusplus.api.utils.Log;
 import com.xiaoying.faceplusplus.api.utils.StringUtil;
 
 /**
- * 功能：
+ * 功能：Group服务类
  * @author xiaoying
  */
 public class GroupService extends BaseService {
@@ -69,19 +70,16 @@ public class GroupService extends BaseService {
 		params.put("person_id", body.getPerson_id());
 		params.put("person_name", body.getPerson_name());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_GROUP_CREATE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_GROUP_CREATE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		GroupCreateResp result = new GroupCreateResp();
-		if(json.containsKey("group_id")) {
-			result.setGroup_id(json.getString("group_id"));
-			result.setGroup_name(json.getString("group_name"));
-			result.setTag(json.getString("tag"));
-			result.setAdded_person(json.getInt("added_person"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setGroup_id(json.optString("group_id"));
+		result.setGroup_name(json.optString("group_name"));
+		result.setTag(json.optString("tag"));
+		result.setAdded_person(json.optInt("added_person"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -93,7 +91,7 @@ public class GroupService extends BaseService {
 	 * @throws IOException
 	 */
 	public GroupDeleteResp deleteGroup(GroupDeleteReq body) throws ClientProtocolException, IOException {
-		if(StringUtil.isEmpty(body.getGroup_id()) || StringUtil.isEmpty(body.getGroup_name())) {
+		if(StringUtil.isEmpty(body.getGroup_id()) && StringUtil.isEmpty(body.getGroup_name())) {
 			throw new IllegalArgumentException("group_id or group_name must to be set one");
 		}
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -102,17 +100,14 @@ public class GroupService extends BaseService {
 		params.put("group_name", body.getGroup_name());
 		params.put("group_id", body.getGroup_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_GROUP_DELETE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_GROUP_DELETE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		GroupDeleteResp result = new GroupDeleteResp();
-		if(json.containsKey("deleted")) {
-			result.setSuccess(json.getBoolean("success"));
-			result.setDeleted(json.getInt("deleted"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSuccess(json.optBoolean("success"));
+		result.setDeleted(json.optInt("deleted"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -138,17 +133,14 @@ public class GroupService extends BaseService {
 		params.put("person_name", body.getPerson_name());
 		params.put("person_id", body.getPerson_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_GROUP_ADD_PERSON, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_GROUP_ADD_PERSON, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		GroupAddPersonResp result = new GroupAddPersonResp();
-		if(json.containsKey("added")) {
-			result.setSuccess(json.getBoolean("success"));
-			result.setAdded(json.getInt("added"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSuccess(json.optBoolean("success"));
+		result.setAdded(json.optInt("added"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -174,17 +166,14 @@ public class GroupService extends BaseService {
 		params.put("person_name", body.getPerson_name());
 		params.put("person_id", body.getPerson_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_GROUP_ADD_PERSON, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_GROUP_ADD_PERSON, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		GroupRemovePersonResp result = new GroupRemovePersonResp();
-		if(json.containsKey("removed")) {
-			result.setSuccess(json.getBoolean("success"));
-			result.setRemoved(json.getInt("removed"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setSuccess(json.optBoolean("success"));
+		result.setRemoved(json.optInt("removed"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -208,18 +197,15 @@ public class GroupService extends BaseService {
 		params.put("name", body.getName());
 		params.put("tag", body.getTag());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_GROUP_SET_INFO, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_GROUP_SET_INFO, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		GroupSetInfoResp result = new GroupSetInfoResp();
-		if(json.containsKey("group_name")) {
-			result.setGroup_name(json.getString("group_name"));
-			result.setGroup_id(json.getString("group_id"));
-			result.setTag(json.getString("tag"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setGroup_name(json.optString("group_name"));
+		result.setGroup_id(json.optString("group_id"));
+		result.setTag(json.optString("tag"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -234,19 +220,16 @@ public class GroupService extends BaseService {
 		params.put("group_name", body.getGroup_name());
 		params.put("group_id", body.getGroup_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_GROUP_GET_INFO, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_GROUP_GET_INFO, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		GroupGetInfoResp result = new GroupGetInfoResp();
-		if(json.containsKey("group_name")) {
-			result.setGroup_name(json.getString("group_name"));
-			result.setGroup_id(json.getString("group_id"));
-			result.setTag(json.getString("tag"));
-			result.setPerson(getPersons(json.getJSONArray("person")));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setGroup_name(json.optString("group_name"));
+		result.setGroup_id(json.optString("group_id"));
+		result.setTag(json.optString("tag"));
+		result.setPerson(getPersons(json.optJSONArray("person")));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -258,9 +241,9 @@ public class GroupService extends BaseService {
 		for(Iterator<JSONObject> i = personArray.iterator(); i.hasNext(); ) {
 			personObj = JSONObject.fromObject(i.next());
 			person = new Person();
-			person.setPerson_name(personObj.getString("person_name"));
-			person.setPerson_id(personObj.getString("person_id"));
-			person.setTag(personObj.getString("tag"));
+			person.setPerson_name(personObj.optString("person_name"));
+			person.setPerson_id(personObj.optString("person_id"));
+			person.setTag(personObj.optString("tag"));
 			persons.add(person);
 		}
 		return persons;

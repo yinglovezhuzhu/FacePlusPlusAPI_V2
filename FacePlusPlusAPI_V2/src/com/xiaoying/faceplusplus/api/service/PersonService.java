@@ -25,7 +25,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
-import com.xiaoying.faceplusplus.api.config.Config;
+import com.xiaoying.faceplusplus.api.config.RespConfig;
+import com.xiaoying.faceplusplus.api.config.UrlConfig;
 import com.xiaoying.faceplusplus.api.entity.Face;
 import com.xiaoying.faceplusplus.api.entity.Group;
 import com.xiaoying.faceplusplus.api.entity.request.person.PersonAddFaceReq;
@@ -74,20 +75,17 @@ public class PersonService extends BaseService {
 	}
 	
 	private PersonCreateResp getCreateRespose(Map<String, Object> params) throws ClientProtocolException, IOException {
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_PERSON_CREATE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_PERSON_CREATE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		PersonCreateResp result = new PersonCreateResp();
-		if(json.containsKey("added_group")) {
-			result.setAdded_group(json.getInt("added_group"));
-			result.setAdded_face(json.getInt("added_face"));
-			result.setTag(json.getString("tag"));
-			result.setPerson_name(json.getString("person_name"));
-			result.setPerson_id(json.getString("person_id"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setAdded_group(json.optInt("added_group"));
+		result.setAdded_face(json.optInt("added_face"));
+		result.setTag(json.optString("tag"));
+		result.setPerson_name(json.optString("person_name"));
+		result.setPerson_id(json.optString("person_id"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -108,17 +106,14 @@ public class PersonService extends BaseService {
 		params.put("person_name", body.getPerson_name());
 		params.put("person_id", body.getPerson_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_PERSON_DELETE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_PERSON_DELETE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		PersonDeleteResp result = new PersonDeleteResp();
-		if(json.containsKey("deleted")) {
-			result.setDeleted(json.getInt("deleted"));
-			result.setSuccess(json.getBoolean("success"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setDeleted(json.optInt("deleted"));
+		result.setSuccess(json.optBoolean("success"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -143,17 +138,14 @@ public class PersonService extends BaseService {
 		params.put("person_id", body.getPerson_id());
 		params.put("face_id", body.getFace_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_PERSON_ADD_FACE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_PERSON_ADD_FACE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		PersonAddFaceResp result = new PersonAddFaceResp();
-		if(json.containsKey("added")) {
-			result.setAdded(json.getInt("added"));
-			result.setSuccess(json.getBoolean("success"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setAdded(json.optInt("added"));
+		result.setSuccess(json.optBoolean("success"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -178,17 +170,14 @@ public class PersonService extends BaseService {
 		params.put("person_id", body.getPerson_id());
 		params.put("face_id", body.getFace_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_PERSON_REMOVE_FACE, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_PERSON_REMOVE_FACE, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		PersonRemoveFaceResp result = new PersonRemoveFaceResp();
-		if(json.containsKey("removed")) {
-			result.setRemoved(json.getInt("removed"));
-			result.setSuccess(json.getBoolean("success"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setRemoved(json.optInt("removed"));
+		result.setSuccess(json.optBoolean("success"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -211,18 +200,15 @@ public class PersonService extends BaseService {
 		params.put("name", body.getName());
 		params.put("tag", body.getTag());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_PERSON_SET_INFO, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_PERSON_SET_INFO, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		PersonSetInfoResp result = new PersonSetInfoResp();
-		if(json.containsKey("person_id")) {
-			result.setPerson_id(json.getString("person_id"));
-			result.setPerson_name(json.getString("person_name"));
-			result.setTag(json.getString("tag"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setPerson_id(json.optString("person_id"));
+		result.setPerson_name(json.optString("person_name"));
+		result.setTag(json.optString("tag"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 
@@ -243,20 +229,17 @@ public class PersonService extends BaseService {
 		params.put("person_name", body.getPerson_name());
 		params.put("person_id", body.getPerson_id());
 		
-		HttpResponse resp = HttpUtil.doPost(Config.PATH_PERSON_GET_INFO, params);
+		HttpResponse resp = HttpUtil.doPost(UrlConfig.PATH_PERSON_GET_INFO, params);
 		JSONObject json = JSONObject.fromObject(EntityUtils.toString(resp.getEntity()));
 		Log.i(json.toString());
 		PersonGetInfoResp result = new PersonGetInfoResp();
-		if(json.containsKey("person_id")) {
-			result.setPerson_id(json.getString("person_id"));
-			result.setPerson_name(json.getString("person_name"));
-			result.setFace(getFaceInfo(json.getJSONArray("face")));
-			result.setGroup(getGroupInfo(json.getJSONArray("group")));
-			result.setTag(json.getString("tag"));
-		} else {
-			result.setError(json.getString("error"));
-			result.setError_code(json.getInt("error_code"));
-		}
+		result.setPerson_id(json.optString("person_id"));
+		result.setPerson_name(json.optString("person_name"));
+		result.setFace(getFaceInfo(json.optJSONArray("face")));
+		result.setGroup(getGroupInfo(json.optJSONArray("group")));
+		result.setTag(json.optString("tag"));
+		result.setError(json.optString("error"));
+		result.setError_code(json.optInt("error_code", RespConfig.RESP_OK));
 		return result;
 	}
 	
@@ -269,8 +252,8 @@ public class PersonService extends BaseService {
 		for(Iterator<JSONObject> i = faceArray.iterator(); i.hasNext(); ) {
 			faceObj = JSONObject.fromObject(i.next());
 			face = new Face();
-			face.setFace_id(faceObj.getString("face_id"));
-			face.setTag(faceObj.getString("tag"));
+			face.setFace_id(faceObj.optString("face_id"));
+			face.setTag(faceObj.optString("tag"));
 			faces.add(face);
 		}
 		return faces;
@@ -284,8 +267,8 @@ public class PersonService extends BaseService {
 		for(Iterator<JSONObject> i = groupArray.iterator(); i.hasNext(); ) {
 			groupObj = JSONObject.fromObject(i.next());
 			group = new Group();
-			group.setGroup_id(groupObj.getString("group_id"));
-			group.setGroup_name(groupObj.getString("group_name"));
+			group.setGroup_id(groupObj.optString("group_id"));
+			group.setGroup_name(groupObj.optString("group_name"));
 			group.setTag(groupObj.getString("tag"));
 			groups.add(group);
 		}

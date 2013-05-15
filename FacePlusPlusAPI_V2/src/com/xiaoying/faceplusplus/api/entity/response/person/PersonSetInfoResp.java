@@ -67,10 +67,14 @@ public class PersonSetInfoResp extends BaseResponse {
 	public void setPerson_id(String person_id) {
 		this.person_id = person_id;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "PersonSetInfoResp [tag=" + tag + ", person_name=" + person_name
-				+ ", person_id=" + person_id + "]";
+				+ ", person_id=" + person_id + ", error=" + error
+				+ ", error_code=" + error_code + "]";
 	}
 	
 	

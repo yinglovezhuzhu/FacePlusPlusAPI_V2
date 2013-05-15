@@ -53,9 +53,13 @@ public class PersonRemoveFaceResp extends BaseResponse {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "PersonRemoveFaceResp [removed=" + removed + ", success="
-				+ success + "]";
+				+ success + ", error=" + error + ", error_code=" + error_code
+				+ "]";
 	}
 }

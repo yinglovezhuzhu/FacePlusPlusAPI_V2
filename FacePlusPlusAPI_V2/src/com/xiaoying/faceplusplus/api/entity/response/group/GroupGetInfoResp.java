@@ -90,5 +90,15 @@ public class GroupGetInfoResp extends BaseResponse {
 	public void setPerson(List<Person> person) {
 		this.person = person;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "GroupGetInfoResp [group_name=" + group_name + ", group_id="
+				+ group_id + ", tag=" + tag + ", person=" + person + ", error="
+				+ error + ", error_code=" + error_code + "]";
+	}
 	
 }

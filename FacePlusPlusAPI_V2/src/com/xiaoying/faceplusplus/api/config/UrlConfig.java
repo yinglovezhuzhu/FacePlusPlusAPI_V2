@@ -1,5 +1,5 @@
 /*
- * 文件名：Config.java
+ * 文件名：UrlConfig.java
  * 版权：<版权>
  * 描述：<描述>
  * 创建人：xiaoying
@@ -13,7 +13,7 @@ package com.xiaoying.faceplusplus.api.config;
  * 功能：配置类
  * @author xiaoying
  */
-public class Config {
+public class UrlConfig {
 	
 	public static final String CHART_SET = "UTF-8";
 
