@@ -22,6 +22,18 @@ public class FacesetRemoveFaceReq extends BaseRequest {
 	private String faceset_name;	//相应Faceset的name
 	private String faceset_id;	//相应Faceset的id
  	private String face_id;	//一组用逗号分隔的face_id,表示将这些Face加入到相应Faceset中。
+ 	
+ 	public FacesetRemoveFaceReq() {
+		
+	}
+	
+	public FacesetRemoveFaceReq(String faceset, boolean isId) {
+		if(isId) {
+			setFaceset_id(faceset);
+		} else {
+			setFaceset_name(faceset);
+		}
+	}
 	/**
 	 * 相应Faceset的name
 	 * @return the faceset_name

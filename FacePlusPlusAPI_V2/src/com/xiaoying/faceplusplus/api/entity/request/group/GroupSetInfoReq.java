@@ -23,6 +23,18 @@ public class GroupSetInfoReq extends BaseRequest {
 	private String name;	//新的group_name
 	private String tag;	//新的tag
 	
+	public GroupSetInfoReq() {
+		
+	}
+	
+	public GroupSetInfoReq(String group, boolean isId) {
+		if(isId) {
+			setGroup_id(group);
+		} else {
+			setGroup_name(group);
+		}
+	}
+	
 	/**
 	 * 相应Group的id
 	 * @return

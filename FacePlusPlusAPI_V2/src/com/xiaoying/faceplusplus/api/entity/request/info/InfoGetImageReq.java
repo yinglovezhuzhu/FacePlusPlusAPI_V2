@@ -20,6 +20,14 @@ import com.xiaoying.faceplusplus.api.entity.request.BaseRequest;
  */
 public class InfoGetImageReq extends BaseRequest {
 	private String img_id;	//目标图片的img_id
+	
+	public InfoGetImageReq() {
+		
+	}
+	
+	public InfoGetImageReq(String img_id) {
+		this.img_id = img_id;
+	}
 
 	/**
 	 * 目标图片的img_id

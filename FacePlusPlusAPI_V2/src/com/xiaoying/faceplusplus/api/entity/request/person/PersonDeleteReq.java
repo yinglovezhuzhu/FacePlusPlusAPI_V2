@@ -21,6 +21,15 @@ public class PersonDeleteReq extends BaseRequest{
 	private String person_id;	//用逗号隔开的待删除的Person name列表
 	
 	public PersonDeleteReq() {
+		
+	}
+	
+	public PersonDeleteReq(String person, boolean isId) {
+		if(isId) {
+			setPerson_id(person);
+		} else {
+			setPerson_name(person);
+		}
 	}
 	
 	/**

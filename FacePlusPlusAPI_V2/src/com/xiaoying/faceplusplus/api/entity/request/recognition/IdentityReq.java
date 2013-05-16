@@ -34,8 +34,12 @@ public class IdentityReq extends BaseRequest {
 		
 	}
 	
-	public IdentityReq(String group_id) {
-		this.group_id = group_id;
+	public IdentityReq(String group, boolean isId) {
+		if(isId) {
+			setGroup_id(group);
+		} else {
+			setGroup_name(group);
+		}
 	}
 	
 	/**

@@ -21,6 +21,18 @@ public class FacesetSetInfoReq {
 	private String faceset_name;	//相应faceset的name
 	private String name;	//新的name
 	private String tag;	//新的tag
+	
+ 	public FacesetSetInfoReq() {
+		
+	}
+	
+	public FacesetSetInfoReq(String faceset, boolean isId) {
+		if(isId) {
+			setFaceset_id(faceset);
+		} else {
+			setFaceset_name(faceset);
+		}
+	}
 	/**
 	 * 相应faceset的id
 	 * @return the faceset_id

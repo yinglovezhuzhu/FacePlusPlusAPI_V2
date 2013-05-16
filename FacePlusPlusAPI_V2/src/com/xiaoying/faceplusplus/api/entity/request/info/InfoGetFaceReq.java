@@ -20,6 +20,14 @@ import com.xiaoying.faceplusplus.api.entity.request.BaseRequest;
  */
 public class InfoGetFaceReq extends BaseRequest {
 	private String face_id;	//一组用逗号分割的face_id
+	
+	public InfoGetFaceReq() {
+		
+	}
+	
+	public InfoGetFaceReq(String face_id) {
+		setFace_id(face_id);
+	}
 
 	/**
 	 * 一组用逗号分割的face_id

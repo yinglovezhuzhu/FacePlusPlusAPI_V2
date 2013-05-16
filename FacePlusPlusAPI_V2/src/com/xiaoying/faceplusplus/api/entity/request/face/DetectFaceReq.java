@@ -40,6 +40,14 @@ public class DetectFaceReq extends BaseRequest {
 	public DetectFaceReq() {
 		
 	}
+	
+	public DetectFaceReq(String url) {
+		setUrl(url);
+	}
+	
+	public DetectFaceReq(File img) {
+		setImg(img);
+	}
 
 	/**
 	 * 待检测图片的URL

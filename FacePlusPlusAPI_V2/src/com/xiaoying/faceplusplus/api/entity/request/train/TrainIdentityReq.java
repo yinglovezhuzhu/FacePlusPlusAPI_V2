@@ -21,6 +21,19 @@ import com.xiaoying.faceplusplus.api.entity.request.BaseRequest;
 public class TrainIdentityReq extends BaseRequest {
 	private String group_id;	//识别候选人组成的Group id
 	private String group_name;	//识别候选人组成的Group name
+	
+	public TrainIdentityReq() {
+		
+	}
+	
+	public TrainIdentityReq(String group, boolean isId) {
+		if(isId) {
+			setGroup_id(group);
+		} else {
+			setGroup_name(group);
+		}
+	}
+	
 	/**
 	 * 识别候选人组成的Group id
 	 * @return the group_id

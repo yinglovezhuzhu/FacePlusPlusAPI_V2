@@ -21,6 +21,19 @@ import com.xiaoying.faceplusplus.api.entity.request.BaseRequest;
 public class GroupingFaceReq extends BaseRequest {
 	private String faceset_id;		//相应Faceset的id。
 	private String faceset_name;	//相应Faceset的name。
+	
+	public GroupingFaceReq() {
+		
+	}
+	
+	public GroupingFaceReq(String faceset, boolean isId) {
+		if(isId) {
+			setFaceset_id(faceset);
+		} else {
+			setFaceset_name(faceset);
+		}
+	}
+	
 	/**
 	 * 相应Faceset的id。
 	 * @return the faceset_id

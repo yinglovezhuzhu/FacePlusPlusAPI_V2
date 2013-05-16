@@ -24,6 +24,11 @@ public class PersonCreateReq extends BaseRequest {
 	private String group_name;	//一组用逗号分割的group id列表或者group name列表。如果该参数被指定，该Person被create之后就会被加入到这些组中。
 	
 	public PersonCreateReq() {
+		
+	}
+	
+	public PersonCreateReq(String person_name) {
+		setPerson_name(person_name);
 	}
 	
 	/**

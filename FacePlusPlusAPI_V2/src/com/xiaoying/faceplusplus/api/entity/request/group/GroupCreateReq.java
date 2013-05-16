@@ -19,6 +19,15 @@ public class GroupCreateReq {
 	private String tag;//Group的tag，不需要全局唯一，不能包含^@,&=*'"等非法字符，长度不能超过255。
 	private String person_id;//一组用逗号分隔的person_id,表示将这些Person加入到该Group中。注意，一个Person可以被加入到多个Group中。
 	private String person_name; //一组用逗号分隔的person_name, 表示将这些Person加入到该Group中。注意，一个Person可以被加入到多个Group中。
+	
+ 	public GroupCreateReq() {
+		
+	}
+	
+	public GroupCreateReq(String group_name) {
+		setGroup_name(group_name);
+	}
+	
 	/**
 	 * Group的Name信息，必须在App中全局唯一。Name不能包含^@,&=*'"等非法字符，且长度不得超过255。Name也可以不指定，此时系统将产生一个随机的name。
 	 * @return

@@ -15,7 +15,7 @@ import java.io.IOException;
 import org.apache.http.client.ClientProtocolException;
 
 import com.xiaoying.faceplusplus.api.cliet.Client;
-import com.xiaoying.faceplusplus.api.entity.request.recognition.IdentityReq;
+import com.xiaoying.faceplusplus.api.entity.request.info.InfoGetFaceReq;
 import com.xiaoying.faceplusplus.api.service.FaceService;
 import com.xiaoying.faceplusplus.api.service.FacesetService;
 import com.xiaoying.faceplusplus.api.service.GroupService;
@@ -146,10 +146,10 @@ public class Test {
 			req.setImg_id("934e323a5facd0cce03d5bf3aad65dcd");
 			Log.i(info.getImage(req).toString());*/
 			
-			/*InfoGetFaceReq req = new InfoGetFaceReq();
+			InfoGetFaceReq req = new InfoGetFaceReq();
 			req.setFace_id("7ba1ae5cd5fc5892d17539fb975fae5a,8192a21d4429e6b13a549fec880e5ffb");
 //			req.setFace_id("7ba1ae5cd5fc5892d17539fb975fae5a");
-			System.out.println(info.getFace(req));*/
+			System.out.println(info.getFace(req));
 			
 //			System.out.println(info.getPersonList());
 			
@@ -203,11 +203,11 @@ public class Test {
 			req.setCount(6);
 			System.out.println(recognition.search(req));*/
 			
-			IdentityReq req2 = new IdentityReq();
-			req2.setGroup_name("张运迎测试Group");
-//			req2.setImg(new File("/home/xiaoying/pic3.jpg"));
-			req2.setKey_face_id("2bc15dd0fbaf99e958b46e7ec4b7450d");
-			System.out.println(recognition.identity(req2));
+//			IdentityReq req2 = new IdentityReq();
+//			req2.setGroup_name("张运迎测试Group");
+////			req2.setImg(new File("/home/xiaoying/pic3.jpg"));
+//			req2.setKey_face_id("2bc15dd0fbaf99e958b46e7ec4b7450d");
+//			System.out.println(recognition.identity(req2));
 			
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

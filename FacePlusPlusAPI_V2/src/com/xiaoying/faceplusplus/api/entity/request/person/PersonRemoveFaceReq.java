@@ -23,6 +23,15 @@ public class PersonRemoveFaceReq extends BaseRequest {
  	private String face_id;	//	一组用逗号分隔的face_id,表示将这些Face加入到相应Person中。
 
 	public PersonRemoveFaceReq() {
+		
+	}
+	
+	public PersonRemoveFaceReq(String person, boolean isId) {
+		if(isId) {
+			setPerson_id(person);
+		} else {
+			setPerson_name(person);
+		}
 	}
 
 	/**

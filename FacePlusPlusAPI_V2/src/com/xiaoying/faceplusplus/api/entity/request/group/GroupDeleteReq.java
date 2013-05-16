@@ -20,6 +20,18 @@ public class GroupDeleteReq extends BaseRequest {
 	private String group_name;	//一组用逗号分割的group_id，表示删除这些Group
 	private String group_id;	//一组用逗号分割的group_name，表示删除这些Group
 	
+ 	public GroupDeleteReq() {
+		
+	}
+	
+	public GroupDeleteReq(String group, boolean isId) {
+		if(isId) {
+			setGroup_id(group);
+		} else {
+			setGroup_name(group);
+		}
+	}
+	
 	/**
 	 * 一组用逗号分割的group_name，表示删除这些Group
 	 * 

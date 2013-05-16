@@ -21,6 +21,18 @@ import com.xiaoying.faceplusplus.api.entity.request.BaseRequest;
 public class TrainVerifyReq extends BaseRequest {
 	private String person_id;	//验证对象person_id
 	private String person_name;	//验证对象person_name
+	
+	public TrainVerifyReq() {
+		
+	}
+	
+	public TrainVerifyReq(String person, boolean isId) {
+		if(isId) {
+			setPerson_id(person);
+		} else {
+			setPerson_name(person);
+		}
+	}
 	/**
 	 * 验证对象person_id
 	 * @return the person_id

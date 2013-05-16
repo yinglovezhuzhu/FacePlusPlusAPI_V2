@@ -24,6 +24,15 @@ public class PersonSetInfoReq extends BaseRequest {
 	private String tag;	//新的tag
 
 	public PersonSetInfoReq() {
+		
+	}
+	
+	public PersonSetInfoReq(String person, boolean isId) {
+		if(isId) {
+			setPerson_id(person);
+		} else {
+			setPerson_name(person);
+		}
 	}
 
 	/**

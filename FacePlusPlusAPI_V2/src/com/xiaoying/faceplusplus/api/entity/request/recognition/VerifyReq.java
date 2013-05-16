@@ -27,9 +27,13 @@ public class VerifyReq extends BaseRequest {
 		
 	}
 	
-	public VerifyReq(String face_id, String person_id) {
-		this.face_id = face_id;
-		this.person_id = person_id;
+	public VerifyReq(String face_id, String person, boolean isId) {
+		setFace_id(face_id);
+		if(isId) {
+			setPerson_id(person);
+		} else {
+			setPerson_name(person);
+		}
 	}
 	
 	/**

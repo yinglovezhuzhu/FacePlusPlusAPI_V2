@@ -20,6 +20,18 @@ public class PersonGetInfoReq extends BaseRequest {
 	private String person_id;	//相应Person的id
 	private String person_name;	//相应Person的name
 	
+	public PersonGetInfoReq() {
+		
+	}
+	
+	public PersonGetInfoReq(String person, boolean isId) {
+		if(isId) {
+			setPerson_id(person);
+		} else {
+			setPerson_name(person);
+		}
+	}
+	
 	/**
 	 * 相应Person的id
 	 * @return

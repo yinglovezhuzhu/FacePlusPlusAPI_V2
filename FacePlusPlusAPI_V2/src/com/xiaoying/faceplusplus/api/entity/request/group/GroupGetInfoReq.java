@@ -21,6 +21,23 @@ public class GroupGetInfoReq extends BaseRequest {
 	private String group_id;	//待查询Group的id。开发者也可以指定group_id=none，此时将返回所有未加入任何Group的Person。
 	private String group_name;	//待查询Group的name。开发者也可以指定group_id=none，此时将返回所有未加入任何Group的Person。
 	
+ 	public GroupGetInfoReq() {
+		
+	}
+	
+ 	/**
+ 	 * 若指定group_id=none，此时将返回所有未加入任何Group的Person。
+ 	 * @param group
+ 	 * @param isId
+ 	 */
+	public GroupGetInfoReq(String group, boolean isId) {
+		if(isId) {
+			setGroup_id(group);
+		} else {
+			setGroup_name(group);
+		}
+	}
+	
 	/**
 	 * 待查询Group的id。开发者也可以指定group_id=none，此时将返回所有未加入任何Group的Person。
 	 * @return

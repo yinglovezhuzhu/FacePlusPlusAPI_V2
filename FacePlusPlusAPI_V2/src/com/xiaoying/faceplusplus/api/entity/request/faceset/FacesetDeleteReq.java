@@ -22,6 +22,18 @@ public class FacesetDeleteReq extends BaseRequest {
 	private String faceset_name;	//用逗号隔开的待删除的faceset name列表
 	private String faceset_id;	//用逗号隔开的待删除的faceset id列表
 	
+	public FacesetDeleteReq() {
+		
+	}
+	
+	public FacesetDeleteReq(String faceset, boolean isId) {
+		if(isId) {
+			setFaceset_id(faceset);
+		} else {
+			setFaceset_name(faceset);
+		}
+	}
+	
 	/**
 	 * 用逗号隔开的待删除的faceset name列表
 	 * @return the faceset_name

@@ -23,6 +23,18 @@ public class GroupAddPersonReq extends BaseRequest {
 	private String person_id;	//一组用逗号分隔的person_id，表示将这些Person加入到相应Group中。
 	private String person_name;	//一组用逗号分隔的person_name，表示将这些Person加入到相应Group中。
 	
+ 	public GroupAddPersonReq() {
+		
+	}
+	
+	public GroupAddPersonReq(String group, boolean isId) {
+		if(isId) {
+			setGroup_id(group);
+		} else {
+			setGroup_name(group);
+		}
+	}
+	
 	/**
 	 * 相应Group的id
 	 * @return

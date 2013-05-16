@@ -30,9 +30,13 @@ public class SearchReq extends BaseRequest {
  		
  	}
  	
- 	public SearchReq(String key_face_id, String faceset_id) {
- 		this.key_face_id = key_face_id;
- 		this.faceset_id = faceset_id;
+ 	public SearchReq(String key_face_id, String faceset, boolean isId) {
+ 		setKey_face_id(key_face_id);
+ 		if(isId) {
+ 			setFaceset_id(faceset);
+ 		} else {
+ 			setFaceset_name(faceset);
+ 		}
  	}
  	
  	/**

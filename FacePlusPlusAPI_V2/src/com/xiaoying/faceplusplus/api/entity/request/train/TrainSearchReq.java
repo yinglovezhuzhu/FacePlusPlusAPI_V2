@@ -21,6 +21,19 @@ import com.xiaoying.faceplusplus.api.entity.request.BaseRequest;
 public class TrainSearchReq extends BaseRequest {
 	private String faceset_id;	//用于搜索的face组成的faceset_id
 	private String faceset_name;//用于搜索的face组成的faceset_name
+	
+	public TrainSearchReq() {
+		
+	}
+	
+	public TrainSearchReq(String faceset, boolean isId) {
+		if(isId) {
+			setFaceset_id(faceset);
+		} else {
+			setFaceset_name(faceset);
+		}
+	}
+	
 	/**
 	 * 用于搜索的face组成的faceset_id
 	 * @return the faceset_id
