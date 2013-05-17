@@ -146,14 +146,14 @@ public class Test {
 			req.setImg_id("934e323a5facd0cce03d5bf3aad65dcd");
 			Log.i(info.getImage(req).toString());*/
 			
-			InfoGetFaceReq req = new InfoGetFaceReq();
-			req.setFace_id("7ba1ae5cd5fc5892d17539fb975fae5a,8192a21d4429e6b13a549fec880e5ffb");
+			/*InfoGetFaceReq req = new InfoGetFaceReq();
+			req.setFace_id("7ba1ae5cd5fc5892d17539fb975fae5a");
 //			req.setFace_id("7ba1ae5cd5fc5892d17539fb975fae5a");
-			System.out.println(info.getFace(req));
+			System.out.println(info.getFace(req));*/
 			
 //			System.out.println(info.getPersonList());
 			
-//			System.out.println(info.getFacsetList());
+			System.out.println(info.getFacsetList());
 			
 //			System.out.println(info.getGroupList());
 //			System.out.println(info.getSesson("1b4f90bee2a44f0388e92ea32bded885"));

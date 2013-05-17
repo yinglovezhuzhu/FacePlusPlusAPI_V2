@@ -1,5 +1,5 @@
 /*
- * 文件名：DetectFaceReq.java
+ * 文件名：DetectReq.java
  * 版权：<版权>
  * 描述：<描述>
  * 创建人：xiaoying
@@ -18,7 +18,7 @@ import com.xiaoying.faceplusplus.api.entity.request.BaseRequest;
  * 功能：
  * @author xiaoying
  */
-public class DetectFaceReq extends BaseRequest {
+public class DetectReq extends BaseRequest {
 	
 	public static final String DETECT_MODE_NORMAL = "normal";
 	public static final String DETECT_MODE_ONEFACE = "oneface";
@@ -37,15 +37,15 @@ public class DetectFaceReq extends BaseRequest {
 	private String tag;	//可以为图片中检测出的每一张Face指定一个不包含^@,&=*'"等非法字符且不超过255字节的字符串作为tag，tag信息可以通过 /info/get_face 查询
 	private Boolean async = false;	//如果置为true，该API将会以异步方式被调用；也就是立即返回一个session id，稍后可通过/info/get_session查询结果。默认值为false。
 
-	public DetectFaceReq() {
+	public DetectReq() {
 		
 	}
 	
-	public DetectFaceReq(String url) {
+	public DetectReq(String url) {
 		setUrl(url);
 	}
 	
-	public DetectFaceReq(File img) {
+	public DetectReq(File img) {
 		setImg(img);
 	}
 

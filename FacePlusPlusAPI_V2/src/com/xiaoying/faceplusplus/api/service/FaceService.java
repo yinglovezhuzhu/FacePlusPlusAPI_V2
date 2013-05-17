@@ -30,7 +30,7 @@ import com.xiaoying.faceplusplus.api.config.RespConfig;
 import com.xiaoying.faceplusplus.api.config.UrlConfig;
 import com.xiaoying.faceplusplus.api.entity.Face;
 import com.xiaoying.faceplusplus.api.entity.PointF;
-import com.xiaoying.faceplusplus.api.entity.request.face.DetectFaceReq;
+import com.xiaoying.faceplusplus.api.entity.request.face.DetectReq;
 import com.xiaoying.faceplusplus.api.entity.response.face.DetectResp;
 import com.xiaoying.faceplusplus.api.utils.HttpUtil;
 import com.xiaoying.faceplusplus.api.utils.Log;
@@ -53,7 +53,7 @@ public class FaceService extends BaseService {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public DetectResp detect(DetectFaceReq body) throws ClientProtocolException, IOException {
+	public DetectResp detect(DetectReq body) throws ClientProtocolException, IOException {
 		if(StringUtil.isEmpty(body.getUrl()) && body.getImg() == null) {
 			throw new IllegalArgumentException("Must set a image url or image file");
 		}
